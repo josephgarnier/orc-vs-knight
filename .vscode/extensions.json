@@ -1,5 +1,8 @@
 {
 	"recommendations": [
-		"twxs.cmake"
+		"ms-vscode.cpptools",
+		"mitaki28.vscode-clang",
+		"amiralizadeh9480.cpp-helper",
+		"jeff-hykin.better-cpp-syntax"
 	]
 }

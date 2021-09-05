@@ -122,10 +122,7 @@
 				"cwd": "${workspaceFolder}/build"
 			},
 			"command": "cmake --build . --target all --verbose",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
+			"group": "build",
 			"presentation": {
 				"reveal": "always",
 				"panel": "dedicated",
@@ -141,10 +138,7 @@
 				"cwd": "${workspaceFolder}/build"
 			},
 			"command": "cmake --build . --target all --clean-first",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
+			"group": "build",
 			"presentation": {
 				"reveal": "always",
 				"panel": "dedicated",
@@ -160,10 +154,7 @@
 				"cwd": "${workspaceFolder}/build"
 			},
 			"command": "cmake --build . --target all --clean-first --verbose",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
+			"group": "build",
 			"presentation": {
 				"reveal": "always",
 				"panel": "dedicated",
@@ -178,11 +169,8 @@
 			"options": {
 				"cwd": "${workspaceFolder}/build"
 			},
-			"command": "cmake --build . --target project-name_test && ../bin/project-name_test",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
+			"command": "cmake --build . --target orc-vs-knight_test && ../bin/orc-vs-knight_test",
+			"group": "test",
 			"presentation": {
 				"reveal": "always",
 				"panel": "dedicated",
@@ -253,10 +241,10 @@
 				"cwd": "${workspaceFolder}/bin"
 			},
 			"linux": {
-				"command": "./project-name"
+				"command": "./orc-vs-knight"
 			},
 			"windows": {
-				"command": "project-name"
+				"command": "orc-vs-knight"
 			},
 			"presentation": {
 				"reveal": "always",
