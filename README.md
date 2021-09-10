@@ -4,6 +4,14 @@
 </figure>
 
 # Orc-vs-Knight
+</div>
+<p align="center">
+<strong>A little game developed for a job interview.</strong>
+</p>
+
+<p align="center">
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="CrCC BY-NC-SA 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-brightgreen.svg"/></a> <img alt="plateform-windows-linux-mac" src="https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20mac-lightgrey.svg"/> <img alt="languages-cmake-c++" src="https://img.shields.io/badge/languages-CMake%20%7C%20C%2B%2B-blue.svg"/>
+</p>
 
 Here is a mini game developed as part of a job application. It is written in **modern C++ 17** and in using **modern CMake**, with a particular focus on good practices. This game is crossplaform and works on Windows, Linux and MacOS.
 
@@ -233,10 +241,6 @@ This project has been set up with a specific file/folder structure in mind. The 
 | `README.md` | Readme file for project (needs to be edited). |
 | `run-cmake.bat` | Utility script for Windows to generate the *Build Lifecycle*. |
 | `run-cmake.sh` | Utility script for Linux/MacOS to generate the *Build Lifecycle*. |
-
-## 💻 Notes for recruiters
-
-TODO
 
 ## 🤝 Contributing
 
