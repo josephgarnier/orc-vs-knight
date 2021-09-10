@@ -5,26 +5,26 @@
 			"${workspaceFolder}/src/**",
 			"${workspaceFolder}/include",
 			"${workspaceFolder}/include/**",
-			"/opt/tiled-1.7.0/src/libtiled",
-			"/opt/tiled-1.7.0/src/libtiled/**"
+			"/opt/SFML-2.5.1/include",
+			"/opt/SFML-2.5.1/include/**"
 		],
 		"linuxBrowsePath": [
 			"${workspaceFolder}/src",
 			"${workspaceFolder}/include",
-			"/opt/tiled-1.7.0/src/libtiled"
+			"/opt/SFML-2.5.1/include"
 		],
 		"windowsIncludePath": [
 			"${workspaceFolder}/src",
 			"${workspaceFolder}/src/**",
 			"${workspaceFolder}/include",
 			"${workspaceFolder}/include/**",
-			"D:/Documents/Software_Libraries/tiled-1.7.0/src/libtiled",
-			"D:/Documents/Software_Libraries/tiled-1.7.0/src/libtiled/**"
+			"D:/Documents/Software_Libraries/SFML-2.5.1/gcc-7.3.0-mingw-64/include",
+			"D:/Documents/Software_Libraries/SFML-2.5.1/gcc-7.3.0-mingw-64/include/**"
 		],
 		"windowsBrowsePath": [
 			"${workspaceFolder}/src",
 			"${workspaceFolder}/include",
-			"D:/Documents/Software_Libraries/tiled-1.7.0/src/libtiled"
+			"D:/Documents/Software_Libraries/SFML-2.5.1/gcc-7.3.0-mingw-64/include"
 		]
 	},
 	"configurations": [

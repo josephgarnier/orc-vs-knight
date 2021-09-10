@@ -83,7 +83,12 @@
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
-			"environment": [],
+			"environment": [
+				{
+					"name": "PATH",
+					"value": "${env:PATH};D:/Documents/Software_Libraries/SFML-2.5.1/gcc-7.3.0-mingw-64/bin"
+				}
+			],
 			"externalConsole": false,
 			"avoidWindowsConsoleRedirection": false,
 			"MIMode": "gdb",

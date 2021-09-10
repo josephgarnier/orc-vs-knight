@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"*.cmake.in": "cmake",
+		"*.tpp": "cpp",
+		"string": "cpp",
+		"cassert": "cpp"
+	}
+}
