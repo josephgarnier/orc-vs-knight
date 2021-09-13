@@ -12,7 +12,6 @@
 
 int main() {
 	FastSimDesign::Game game{1000, 600};
-	game.load();
-	game.run();
+	game.run(30);
 	return 0;
 }

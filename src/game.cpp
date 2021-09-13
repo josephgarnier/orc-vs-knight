@@ -107,14 +107,10 @@ namespace FastSimDesign {
 		m_gui_start_message.setPosition(window_size.x / 2, window_size.y / 2 + 100);
 	}
 
-	void Game::load() noexcept
-	{
 		// TODO : créer les entités ici, comme dans initLevel()
 	}
 
-	void Game::run() noexcept
 	{
-		run(30);
 	}
 
 	void Game::run(int min_frame_per_seconds) noexcept

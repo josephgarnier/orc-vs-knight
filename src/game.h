@@ -30,9 +30,7 @@ namespace FastSimDesign {
 		Game& operator=(Game&&) = delete; // Move assignment operator
 		virtual ~Game() = default; // Destructor
 
-		void load() noexcept;
-		void run() noexcept; // only for turn-by-turn games
-		void run(int min_frame_per_seconds) noexcept; // only for real-time games
+		void run(int min_frame_per_seconds) noexcept;
 
 	protected:
 	private:
