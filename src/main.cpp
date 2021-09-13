@@ -8,7 +8,11 @@
 
 #include "iostream"
 
+#include "game.h"
+
 int main() {
-	std::cout << "Main: Hello, World!" << std::endl;
+	FastSimDesign::Game game{1000, 600};
+	game.load();
+	game.run();
 	return 0;
 }
