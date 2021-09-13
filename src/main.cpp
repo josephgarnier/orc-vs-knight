@@ -9,9 +9,17 @@
 #include "iostream"
 
 #include "game.h"
+#include "resource_exception.h"
 
 int main() {
-	FastSimDesign::Game game{1000, 600};
-	game.run(30);
+	try
+	{
+		FastSimDesign::Game game{1000, 600};
+		game.run(30);
+	} catch (FastSimDesign::ResourceException const& e)
+	{
+		std::cerr << "EXCEPTION :"  << e.what() << std::endl;
+		return -1;
+	}
 	return 0;
 }

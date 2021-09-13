@@ -38,7 +38,11 @@ namespace FastSimDesign {
 		, m_stats_frame_counter{}
 		, m_start_message{}
 	{
-		m_font.loadFromFile("./assets/fonts/arial.ttf");
+		if (!m_font.loadFromFile("./assets/fonts/arial.ttf"))
+		{
+			throw ResourceException{"Failed to load a font resource!"};
+		}
+		
 		initKnightPanel();
 		initOrcPanel();
 		initInfoPanel();
