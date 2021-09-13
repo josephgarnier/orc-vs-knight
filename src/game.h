@@ -11,13 +11,10 @@
 #ifndef ORC_VS_KNIGHT_GAME_H
 #define ORC_VS_KNIGHT_GAME_H
 
-#include <cmath>
-
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
 
 #include "world.h"
+#include "gui_layer.h"
 
 namespace FastSimDesign {
 	class Game
@@ -36,41 +33,12 @@ namespace FastSimDesign {
 	private:
 		void processEvents() noexcept;
 		void update(sf::Time const& delta_time) noexcept;
-		void updateGui(sf::Time const& delta_time) noexcept;
-		void updateStatistics(sf::Time const& delta_time) noexcept;
 		void render() noexcept;
-
-		template<typename UI>
-		void centerOrigin(UI& ui_component) const noexcept
-		{
-			sf::FloatRect bounds = ui_component.getLocalBounds();
-			ui_component.setOrigin(std::floor(bounds.left + bounds.width / 2.f), std::floor(bounds.top + bounds.height / 2.f));
-		}
 
 	private:
 		sf::RenderWindow m_window;
 		World m_world;
-
-		sf::Font m_gui_font;
-
-		sf::RectangleShape m_gui_knight_border;
-		sf::Text m_gui_knight_label;
-		sf::Text m_gui_knight_hp_label;
-		sf::Text m_gui_knight_hp_value;
-
-		sf::RectangleShape m_gui_orc_border;
-		sf::Text m_gui_orc_label;
-		sf::Text m_gui_orc_hp_label;
-		sf::Text m_gui_orc_hp_value;
-
-		sf::Text m_gui_stats_label;
-		sf::Text m_gui_stats_value;
-		sf::Text m_gui_round_label;
-		sf::Text m_gui_round_value;
-		sf::Time m_stats_time_since_last_update;
-		std::size_t m_stats_frame_counter;
-		
-		sf::Text m_gui_start_message;
+		GuiLayer m_gui;
 	};
 }
 #endif
