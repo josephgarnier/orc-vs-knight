@@ -11,7 +11,9 @@
 #include <cmath>
 
 namespace FastSimDesign {
-
+	/*****************************************************************************
+	GuiLayer::Methods
+	*****************************************************************************/
 	template<typename TUi>
 	void GuiLayer::centerOrigin(TUi& ui_component) const noexcept
 	{

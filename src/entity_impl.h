@@ -29,7 +29,7 @@ namespace FastSimDesign {
 			using Parent = FastSimDesign::Entity;
 
 		public:
-			explicit Entity(FastSimDesign::World& world, FastSimDesign::Entity::Id id, std::unique_ptr<Sprite> sprite); // Default constructor
+			explicit Entity(FastSimDesign::World& world, FastSimDesign::Entity::Id id, std::unique_ptr<Sprite> sprite) noexcept; // Default constructor
 			Entity(Entity const&) = delete; // Copy constructor
 			Entity(Entity&&) = delete; // Move constructor
 			Entity& operator=(Entity const&) = delete; // Copy assignment operator

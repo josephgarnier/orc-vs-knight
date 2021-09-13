@@ -12,16 +12,11 @@
 
 namespace FastSimDesign {
 	/*****************************************************************************
-	Statics
+	Sprite::Methods
 	*****************************************************************************/
-
-
-	/*****************************************************************************
-	Methods
-	*****************************************************************************/
-	Sprite::Sprite(std::unique_ptr<sf::Shape> shape, std::unique_ptr<sf::Text> text)
-	: m_shape{std::move(shape)}
-	, m_text{std::move(text)}
+	Sprite::Sprite(std::unique_ptr<sf::Shape> shape, std::unique_ptr<sf::Text> text) noexcept
+		: m_shape{std::move(shape)}
+		, m_text{std::move(text)}
 	{
 	}
 

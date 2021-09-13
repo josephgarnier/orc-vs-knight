@@ -21,7 +21,7 @@ namespace FastSimDesign {
 	class Sprite : public sf::Drawable
 	{
 	public:
-		explicit Sprite(std::unique_ptr<sf::Shape> shape, std::unique_ptr<sf::Text> text); // Default constructor
+		explicit Sprite(std::unique_ptr<sf::Shape> shape, std::unique_ptr<sf::Text> text) noexcept; // Default constructor
 		Sprite(Sprite const&) = delete; // Copy constructor
 		Sprite(Sprite&&) = default; // Move constructor
 		Sprite& operator=(Sprite const&) = delete; // Copy assignment operator

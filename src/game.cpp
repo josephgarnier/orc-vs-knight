@@ -12,6 +12,9 @@
 #include <iostream>
 
 namespace FastSimDesign {
+	/*****************************************************************************
+	Game::Methods
+	*****************************************************************************/
 	Game::Game(unsigned int width, unsigned int height)
 		: m_window{sf::VideoMode{width, height}, "Orc vs Knight"}
 		, m_world{width, height}

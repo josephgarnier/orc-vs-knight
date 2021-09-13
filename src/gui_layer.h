@@ -20,7 +20,7 @@ namespace FastSimDesign {
 	class GuiLayer
 	{
 	public:
-		explicit GuiLayer(World& world, sf::RenderWindow& window); // Default constructor
+		explicit GuiLayer(World& world, sf::RenderWindow& window); // throw ResourceException
 		GuiLayer(GuiLayer const&) = delete; // Copy constructor
 		GuiLayer(GuiLayer&&) = delete; // Move constructor
 		GuiLayer& operator=(GuiLayer const&) = delete; // Copy assignment operator

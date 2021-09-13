@@ -15,13 +15,9 @@
 namespace FastSimDesign {
 	namespace Impl {
 		/*****************************************************************************
-		Statics
+		Impl::Entity::Methods
 		*****************************************************************************/
-
-		/*****************************************************************************
-		Methods
-		*****************************************************************************/
-		Entity::Entity(FastSimDesign::World& world, FastSimDesign::Entity::Id id, std::unique_ptr<Sprite> sprite)
+		Entity::Entity(FastSimDesign::World& world, FastSimDesign::Entity::Id id, std::unique_ptr<Sprite> sprite) noexcept
 			: Parent{}
 			, m_world{world}
 			, m_sprite{std::move(sprite)}

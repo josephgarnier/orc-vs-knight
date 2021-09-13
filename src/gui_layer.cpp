@@ -8,15 +8,14 @@
 
 #include "gui_layer.h"
 
+#include <iostream>
+
 #include "world.h"
+#include "resource_exception.h"
 
 namespace FastSimDesign {
 	/*****************************************************************************
-	Statics
-	*****************************************************************************/
-
-	/*****************************************************************************
-	Methods
+	GuiLayer::Methods
 	*****************************************************************************/
 	GuiLayer::GuiLayer(World& world, sf::RenderWindow& window)
 		: m_world{world}
@@ -102,7 +101,7 @@ namespace FastSimDesign {
 	void GuiLayer::initInfoPanel() noexcept
 	{
 		sf::Vector2f window_size(m_window.getSize());
-
+		
 		m_stats_label.setString("Stats:");
 		m_stats_label.setFont(m_font);
 		m_stats_label.setCharacterSize(18);
@@ -127,7 +126,7 @@ namespace FastSimDesign {
 	void GuiLayer::initStartingMessagePanel() noexcept
 	{
 		sf::Vector2f window_size(m_window.getSize());
-
+		
 		std::string message{};
 		message += "Press space Key to run all turn automatically \n";
 		message += "                                OR\n";
@@ -166,7 +165,7 @@ namespace FastSimDesign {
 			m_stats_frame_counter = 0;
 		}
 	}
-
+	
 	void GuiLayer::draw() noexcept
 	{
 		m_window.draw(m_knight_border);

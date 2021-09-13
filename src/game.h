@@ -20,7 +20,7 @@ namespace FastSimDesign {
 	class Game
 	{
 	public:
-		explicit Game(unsigned int width, unsigned int height);
+		explicit Game(unsigned int width, unsigned int height); // throw ResourceException
 		Game(Game const&) = delete; // Copy constructor
 		Game(Game&&) = delete; // Move constructor
 		Game& operator=(Game const&) = delete; // Copy assignment operator
