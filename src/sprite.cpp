@@ -25,7 +25,7 @@ namespace FastSimDesign {
 		m_shape->setPosition(position);
 	}
 
-	void Sprite::setOrigin(sf::Vector2f const& origin) noexcept
+	void Sprite::setName(std::string name) noexcept
 	{
 		m_shape->setOrigin(origin);
 	}

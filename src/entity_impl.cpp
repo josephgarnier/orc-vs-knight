@@ -26,10 +26,6 @@ namespace FastSimDesign {
 		{
 		}
 
-		void Entity::init() noexcept
-		{
-		}
-
 		void Entity::update(sf::Time const& delta_time) noexcept
 		{
 		}

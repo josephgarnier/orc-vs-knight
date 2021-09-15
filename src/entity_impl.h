@@ -42,13 +42,11 @@ namespace FastSimDesign {
 			inline sf::Vector2f const& position() const noexcept override { return m_sprite->position(); }
 			inline Sprite const& sprite() const noexcept override {return *m_sprite.get(); }
 
-			virtual void init() noexcept override;
 			virtual void update(sf::Time const& delta_time) noexcept override;
 			virtual void term() noexcept override;
 
 			void setName(std::string name) noexcept override;
 			void setPosition(float x, float y) noexcept override;
-			void setOrigin(float x, float y) noexcept override;
 
 			friend inline bool operator==(Entity const& left, Entity const& right) noexcept;
 			friend inline bool operator!=(Entity const& left, Entity const& right) noexcept;

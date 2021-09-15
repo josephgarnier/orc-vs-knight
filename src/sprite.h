@@ -28,8 +28,6 @@ namespace FastSimDesign {
 		Sprite& operator=(Sprite&&) = default; // Move assignment operator
 		virtual ~Sprite() = default; // Destructor
 
-		inline sf::Shape const& shape() const noexcept { return *m_shape.get(); }
-		inline sf::Text const& text() const noexcept { return *m_text.get(); }
 		inline sf::Vector2f const& position() const noexcept { return m_shape->getPosition(); }
 		inline sf::Vector2f const& origin() const noexcept { return m_shape->getOrigin(); }
 
