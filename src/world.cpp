@@ -34,10 +34,9 @@ namespace FastSimDesign {
 		std::cout << "World::update at delta time => " << delta_time.asMilliseconds() << std::endl;
 	}
 
-	void World::term() noexcept
+	bool World::isCoordValid(float x, float y) const noexcept
 	{
-		std::cout << "World::term" << std::endl;
-		m_entities.clear();
+		return x >= 0.0f && x < static_cast<float>(m_width) && y >= 0.0f && y < static_cast<float>(m_height);
 	}
 
 	World::EntityContainerPtr World::getEntities() const noexcept

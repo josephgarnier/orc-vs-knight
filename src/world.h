@@ -36,7 +36,9 @@ namespace FastSimDesign {
 		void init() noexcept;
 		void update(sf::Time const& delta_time) noexcept;
 		void term() noexcept;
+		bool isCoordValid(float x, float y) const noexcept;
 
+		inline bool isExists(Entity::Id const& id) const noexcept { return id >= 0 && id < m_entities.size(); }
 		inline std::size_t entityCount() const noexcept { return m_entities.size(); }
 		World::EntityContainerPtr getEntities() const noexcept;
 		template<typename TEntityType>
