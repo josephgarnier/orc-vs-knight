@@ -17,7 +17,7 @@ namespace FastSimDesign {
 		/*****************************************************************************
 		Impl::Entity::Methods
 		*****************************************************************************/
-		Entity::Entity(FastSimDesign::World& world, FastSimDesign::Entity::Id id, std::unique_ptr<Sprite> sprite) noexcept
+		Entity::Entity(FastSimDesign::World& world, FastSimDesign::Entity::Id id, Sprite sprite) noexcept
 			: Parent{}
 			, m_world{world}
 			, m_sprite{std::move(sprite)}
@@ -37,23 +37,18 @@ namespace FastSimDesign {
 		void Entity::setName(std::string name) noexcept
 		{
 			m_name = std::move(name);
+			m_sprite.setName(m_name);
 		}
 
 		void Entity::setPosition(float x, float y) noexcept
 		{
-			// TODO: tester si outofbound avec assert
-			m_sprite->setPosition(sf::Vector2f{x,y});
-		}
-
-		void Entity::setOrigin(float x, float y) noexcept
-		{
-			// TODO: tester si outofbound avec assert
-			m_sprite->setOrigin(sf::Vector2f{x, y});
+			assert(m_world.isCoordValid(x, y) && "Coordinates are out of world limits");
+			m_sprite.setPosition(sf::Vector2f{x, y});
 		}
 
 		void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 		{
-			target.draw(*m_sprite.get(), states);
+			target.draw(m_sprite, states);
 		}
 	}
 }

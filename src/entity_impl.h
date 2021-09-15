@@ -29,7 +29,7 @@ namespace FastSimDesign {
 			using Parent = FastSimDesign::Entity;
 
 		public:
-			explicit Entity(FastSimDesign::World& world, FastSimDesign::Entity::Id id, std::unique_ptr<Sprite> sprite) noexcept; // Default constructor
+			explicit Entity(FastSimDesign::World& world, FastSimDesign::Entity::Id id, Sprite sprite) noexcept; // Default constructor
 			Entity(Entity const&) = delete; // Copy constructor
 			Entity(Entity&&) = delete; // Move constructor
 			Entity& operator=(Entity const&) = delete; // Copy assignment operator
@@ -39,8 +39,8 @@ namespace FastSimDesign {
 			inline FastSimDesign::Entity::Id const& id() const noexcept override { return m_id; }
 			inline std::string const& name() const noexcept override { return m_name; }
 			inline FastSimDesign::World const& world() const noexcept override { return m_world; }
-			inline sf::Vector2f const& position() const noexcept override { return m_sprite->position(); }
-			inline Sprite const& sprite() const noexcept override {return *m_sprite.get(); }
+			inline sf::Vector2f const& position() const noexcept override { return m_sprite.position(); }
+			inline Sprite const& sprite() const noexcept override { return m_sprite; }
 
 			virtual void update(sf::Time const& delta_time) noexcept override;
 			virtual void term() noexcept override;
@@ -59,7 +59,8 @@ namespace FastSimDesign {
 
 		protected:
 			FastSimDesign::World& m_world;
-			std::unique_ptr<Sprite> m_sprite;
+			Sprite m_sprite;
+
 		private:
 			FastSimDesign::Entity::Id m_id;
 			std::string m_name;
