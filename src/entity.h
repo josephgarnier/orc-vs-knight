@@ -14,8 +14,11 @@
 #include <string>
 
 #include <SFML/Graphics/Drawable.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <SFML/System/Time.hpp>
+
+namespace sf
+{
+	class Time;
+}
 
 namespace FastSimDesign {
 	class Sprite;

@@ -14,11 +14,14 @@
 #include <string>
 #include <memory>
 
-#include <SFML/Graphics/Drawable.hpp>
-#include <SFML/System/Time.hpp>
-
 #include "entity.h"
 #include "sprite.h"
+
+namespace sf {
+	class Time;
+	class RenderTarget;
+	class RenderStates;
+}
 
 namespace FastSimDesign {
 	namespace Impl {
