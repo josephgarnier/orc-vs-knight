@@ -107,7 +107,7 @@ namespace FastSimDesign {
 		m_stats_label.setString("Stats:");
 		m_stats_label.setFont(m_font);
 		m_stats_label.setCharacterSize(18);
-		m_stats_label.setPosition(window_size.x / 2.0f - m_stats_label.getGlobalBounds().width - 10.0f, 15.0f);
+		m_stats_label.setPosition(window_size.x / 2.0f - m_stats_label.getGlobalBounds().width - 80.0f, 15.0f);
 
 		m_stats_value.setString("60 fps");
 		m_stats_value.setFont(m_font);
@@ -140,9 +140,9 @@ namespace FastSimDesign {
 		sf::Vector2f window_size(m_window.getSize());
 
 		std::string message{};
-		message += "Press space Key to run all turn automatically \n";
-		message += "                                OR\n";
-		message += "Press backslash Key to run turn one-by-one \n";
+		message += "Press space Key to run all turn automatically (with 1 sec of delay) \n";
+		message += "                                              OR\n";
+		message += "               Press backslash Key to run turn one-by-one \n";
 		m_start_message.setString(message);
 		m_start_message.setFont(m_font);
 		m_start_message.setCharacterSize(15);
