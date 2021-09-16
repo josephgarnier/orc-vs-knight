@@ -149,7 +149,6 @@ namespace FastSimDesign {
 	void GuiLayer::update(sf::Time const& delta_time) noexcept
 	{
 		// TODO update round + other informations
-		updateStatistics(delta_time);
 	}
 
 	void GuiLayer::updateStatistics(sf::Time const& delta_time) noexcept
