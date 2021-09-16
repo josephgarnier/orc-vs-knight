@@ -43,10 +43,6 @@ namespace FastSimDesign {
 		void updateStatistics(sf::Time const& delta_time) noexcept;
 		void draw() noexcept;
 
-	private:
-		template<typename TUi>
-		void centerOrigin(TUi& ui_component) const noexcept;
-
 	protected:
 	private:
 		World& m_world;
@@ -74,5 +70,4 @@ namespace FastSimDesign {
 		sf::Text m_start_message;
 	};
 }
-#include "gui_layer.tpp"
 #endif
