@@ -62,10 +62,12 @@ namespace FastSimDesign {
 
 		sf::Text m_stats_label;
 		sf::Text m_stats_value;
-		sf::Text m_round_label;
-		sf::Text m_round_value;
 		sf::Time m_stats_time_since_last_update;
 		std::size_t m_stats_frame_counter;
+		sf::Text m_round_label;
+		sf::Text m_round_value;
+		sf::Text m_game_status_label;
+		sf::Text m_current_player_value;
 
 		sf::Text m_start_message;
 	};

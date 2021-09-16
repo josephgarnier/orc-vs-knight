@@ -31,10 +31,12 @@ namespace FastSimDesign {
 		, m_orc_hp_value{}
 		, m_stats_label{}
 		, m_stats_value{}
-		, m_round_label{}
-		, m_round_value{}
 		, m_stats_time_since_last_update{}
 		, m_stats_frame_counter{}
+		, m_round_label{}
+		, m_round_value{}
+		, m_game_status_label{}
+		, m_game_status_value{}
 		, m_start_message{}
 	{
 		if (!m_font.loadFromFile("./assets/fonts/arial.ttf"))
@@ -121,6 +123,16 @@ namespace FastSimDesign {
 		m_round_value.setFont(m_font);
 		m_round_value.setCharacterSize(18);
 		m_round_value.setPosition(window_size.x / 2.0f + 5.0f, m_round_label.getPosition().y);
+
+		m_game_status_label.setString("Game status:");
+		m_game_status_label.setFont(m_font);
+		m_game_status_label.setCharacterSize(18);
+		m_game_status_label.setPosition(m_stats_label.getPosition().x, m_round_label.getPosition().y + m_round_label.getGlobalBounds().height + 15.0f);
+
+		m_game_status_value.setString("none");
+		m_game_status_value.setFont(m_font);
+		m_game_status_value.setCharacterSize(18);
+		m_game_status_value.setPosition(window_size.x / 2.0f + 5.0f, m_game_status_label.getPosition().y);
 	}
 
 	void GuiLayer::initStartingMessagePanel() noexcept
@@ -181,6 +193,8 @@ namespace FastSimDesign {
 		m_window.draw(m_stats_value);
 		m_window.draw(m_round_label);
 		m_window.draw(m_round_value);
+		m_window.draw(m_game_status_label);
+		m_window.draw(m_game_status_value);
 
 		m_window.draw(m_start_message);
 	}
