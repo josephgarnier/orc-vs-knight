@@ -18,28 +18,46 @@
 #include <SFML/Graphics/Text.hpp>
 
 namespace FastSimDesign {
-	class Sprite : public sf::Drawable
+	class Sprite final : public sf::Drawable
 	{
 	public:
-		explicit Sprite(std::unique_ptr<sf::Shape> shape, std::unique_ptr<sf::Text> text) noexcept; // Default constructor
+		explicit Sprite(std::unique_ptr<sf::Shape> shape); // throw ResourceException
 		Sprite(Sprite const&) = delete; // Copy constructor
-		Sprite(Sprite&&) = default; // Move constructor
+		Sprite(Sprite&& copy) noexcept; // Move constructor
 		Sprite& operator=(Sprite const&) = delete; // Copy assignment operator
-		Sprite& operator=(Sprite&&) = default; // Move assignment operator
+		Sprite& operator=(Sprite&& copy) noexcept; // Move assignment operator (with copy-and-swap idiom)
 		virtual ~Sprite() = default; // Destructor
+
+		friend inline void swap(Sprite& left, Sprite& right) noexcept; // Copy-and-swap idiom
 
 		inline sf::Vector2f const& position() const noexcept { return m_shape->getPosition(); }
 		inline sf::Vector2f const& origin() const noexcept { return m_shape->getOrigin(); }
 
 		void setPosition(sf::Vector2f const& position) noexcept;
-		void setOrigin(sf::Vector2f const& origin) noexcept;
+		void setName(std::string name) noexcept;
+		void setActionDescription(std::string action) noexcept;
 
 	private:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	private:
+		sf::Font m_font;
+
+		sf::Text m_name;
 		std::unique_ptr<sf::Shape> m_shape;
-		std::unique_ptr<sf::Text> m_text;
+		sf::Text m_action_description;
 	};
+
+	/*****************************************************************************
+	Operator functions
+	*****************************************************************************/
+	inline void swap(Sprite& left, Sprite& right) noexcept
+	{
+		using std::swap;
+		swap(left.m_font, right.m_font);
+		swap(left.m_name, right.m_name);
+		swap(left.m_shape, right.m_shape);
+		swap(left.m_action_description, right.m_action_description);
+	}
 }
 #endif
