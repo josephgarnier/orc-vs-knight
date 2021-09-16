@@ -11,9 +11,14 @@
 #ifndef ORC_VS_KNIGHT_GUI_LAYER_H
 #define ORC_VS_KNIGHT_GUI_LAYER_H
 
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/System/Time.hpp>
+
+namespace sf {
+	class RenderWindow;
+	class Event;
+}
 
 namespace FastSimDesign {
 	class World;
@@ -33,7 +38,7 @@ namespace FastSimDesign {
 		void initStartingMessagePanel() noexcept;
 
 		void processEvents() noexcept;
-		void processEvent(sf::Event const & event) noexcept;
+		void processEvent(sf::Event const& event) noexcept;
 		void update(sf::Time const& delta_time) noexcept;
 		void updateStatistics(sf::Time const& delta_time) noexcept;
 		void draw() noexcept;

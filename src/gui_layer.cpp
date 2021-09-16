@@ -8,9 +8,8 @@
 
 #include "gui_layer.h"
 
-#include <iostream>
+#include <SFML/Graphics/RenderWindow.hpp>
 
-#include "world.h"
 #include "resource_exception.h"
 
 namespace FastSimDesign {
@@ -41,7 +40,7 @@ namespace FastSimDesign {
 		{
 			throw ResourceException{"Failed to load a font resource!"};
 		}
-		
+
 		initKnightPanel();
 		initOrcPanel();
 		initInfoPanel();
@@ -101,7 +100,7 @@ namespace FastSimDesign {
 	void GuiLayer::initInfoPanel() noexcept
 	{
 		sf::Vector2f window_size(m_window.getSize());
-		
+
 		m_stats_label.setString("Stats:");
 		m_stats_label.setFont(m_font);
 		m_stats_label.setCharacterSize(18);
@@ -126,7 +125,7 @@ namespace FastSimDesign {
 	void GuiLayer::initStartingMessagePanel() noexcept
 	{
 		sf::Vector2f window_size(m_window.getSize());
-		
+
 		std::string message{};
 		message += "Press space Key to run all turn automatically \n";
 		message += "                                OR\n";
@@ -135,7 +134,7 @@ namespace FastSimDesign {
 		m_start_message.setFont(m_font);
 		m_start_message.setCharacterSize(15);
 		centerOrigin(m_start_message);
-		m_start_message.setPosition(window_size.x / 2, window_size.y / 2 + 100);
+		m_start_message.setPosition(window_size.x / 2, window_size.y / 2 + 200);
 	}
 
 	void GuiLayer::processEvents() noexcept
@@ -165,7 +164,7 @@ namespace FastSimDesign {
 			m_stats_frame_counter = 0;
 		}
 	}
-	
+
 	void GuiLayer::draw() noexcept
 	{
 		m_window.draw(m_knight_border);
