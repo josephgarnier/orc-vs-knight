@@ -9,7 +9,9 @@
 #include "game.h"
 
 #include <SFML/Window/Event.hpp>
-#include <iostream>
+
+#include "knight.h"
+#include "orc.h"
 
 namespace FastSimDesign {
 	/*****************************************************************************
@@ -20,6 +22,7 @@ namespace FastSimDesign {
 		, m_world{width, height}
 		, m_gui{m_world, m_window}
 	{
+		initEntities();
 	}
 
 	void Game::run(int min_frame_per_seconds) noexcept
@@ -85,7 +88,36 @@ namespace FastSimDesign {
 	{
 		m_window.clear();
 		m_gui.draw();
-		// m_window.draw(m_world);
+		m_window.draw(m_world);
 		m_window.display();
+	}
+
+	void Game::initEntities()
+	{
+		// Create the Knight entity.
+		std::unique_ptr<sf::RectangleShape> knight_body = std::make_unique<sf::RectangleShape>();
+		knight_body->setSize(sf::Vector2f(100, 100));
+		knight_body->setOutlineColor(sf::Color(20, 20, 200));
+		knight_body->setOutlineThickness(1);
+		knight_body->setFillColor(sf::Color::Transparent);
+		knight_body->setPosition(1, 1);
+		Sprite knight_sprite{std::move(knight_body)};
+		Entity::Id knight_id = m_world.createEntity<Knight>(m_world, 0, std::move(knight_sprite));
+		Knight& knight_entity = m_world.getEntity<Knight>(knight_id);
+		knight_entity.setName("Knight");
+		knight_entity.setPosition(350, 300);
+
+		// Create the Orc entity.
+		std::unique_ptr<sf::RectangleShape> orc_body = std::make_unique<sf::RectangleShape>();
+		orc_body->setSize(sf::Vector2f(100, 100));
+		orc_body->setOutlineColor(sf::Color(20, 200, 20));
+		orc_body->setOutlineThickness(1);
+		orc_body->setFillColor(sf::Color::Transparent);
+		orc_body->setPosition(1, 1);
+		Sprite orc_sprite{std::move(orc_body)};
+		Entity::Id orc_id = m_world.createEntity<Orc>(m_world, 1, std::move(orc_sprite));
+		Orc& orc_entity = m_world.getEntity<Orc>(orc_id);
+		orc_entity.setName("Orc");
+		orc_entity.setPosition(650, 300);
 	}
 }

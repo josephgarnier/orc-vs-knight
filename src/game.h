@@ -35,6 +35,7 @@ namespace FastSimDesign {
 		void update(sf::Time const& delta_time) noexcept;
 		void render() noexcept;
 
+		void initEntities(); // throw ResourceException
 	private:
 		sf::RenderWindow m_window;
 		World m_world;
