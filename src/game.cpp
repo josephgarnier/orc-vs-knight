@@ -106,6 +106,7 @@ namespace FastSimDesign {
 		Knight& knight_entity = m_world.getEntity<Knight>(knight_id);
 		knight_entity.setName("Knight");
 		knight_entity.setPosition(350, 300);
+		knight_entity.setHp(100);
 
 		// Create the Orc entity.
 		std::unique_ptr<sf::RectangleShape> orc_body = std::make_unique<sf::RectangleShape>();
@@ -119,5 +120,6 @@ namespace FastSimDesign {
 		Orc& orc_entity = m_world.getEntity<Orc>(orc_id);
 		orc_entity.setName("Orc");
 		orc_entity.setPosition(650, 300);
+		orc_entity.setHp(100);
 	}
 }

@@ -62,9 +62,20 @@ namespace FastSimDesign {
 		m_entities.clear();
 	}
 
+	uint64_t World::aliveEntityCount() const noexcept
+	{
+		int64_t alive_counter = 0;
+		for (std::unique_ptr<Entity> const& entity : m_entities)
+		{
+			if (entity->hp() > 0)
+				alive_counter++;
+		}
+		return alive_counter;
+	}
+
 	void World::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		for (std::unique_ptr<Entity>const & entity : m_entities)
+		for (std::unique_ptr<Entity> const& entity : m_entities)
 		{
 			target.draw(*entity.get(), states);
 		}

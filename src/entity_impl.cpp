@@ -23,6 +23,7 @@ namespace FastSimDesign {
 			, m_sprite{std::move(sprite)}
 			, m_id{id}
 			, m_name{""}
+			, m_hp{0}
 		{
 		}
 
@@ -44,6 +45,12 @@ namespace FastSimDesign {
 		{
 			assert(m_world.isCoordValid(x, y) && "Coordinates are out of world limits");
 			m_sprite.setPosition(sf::Vector2f{x, y});
+		}
+
+		void Entity::setHp(uint16_t hp) noexcept
+		{
+			assert(hp >= 0 && "HP must be a positive value");
+			m_hp = hp;
 		}
 
 		void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const

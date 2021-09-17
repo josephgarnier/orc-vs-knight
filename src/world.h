@@ -48,6 +48,8 @@ namespace FastSimDesign {
 		Entity::Id createEntity(TEntityArgs&&... args) noexcept;
 		void destroyAllEntities() noexcept;
 
+		uint64_t aliveEntityCount() const noexcept;
+
 	protected:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 

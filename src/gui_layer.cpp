@@ -9,9 +9,13 @@
 #include "gui_layer.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Event.hpp>
 
 #include "resource_exception.h"
 #include "util/render_util.h"
+#include "world.h"
+#include "knight.h"
+#include "orc.h"
 
 namespace FastSimDesign {
 	/*****************************************************************************
@@ -69,7 +73,7 @@ namespace FastSimDesign {
 		m_knight_hp_label.setCharacterSize(14);
 		m_knight_hp_label.setPosition(m_knight_border.getPosition().x + 7.0f, m_knight_border.getPosition().y + 35.0f);
 
-		m_knight_hp_value.setString("100");
+		m_knight_hp_value.setString("0");
 		m_knight_hp_value.setFont(m_font);
 		m_knight_hp_value.setCharacterSize(14);
 		m_knight_hp_value.setPosition(m_knight_hp_label.getPosition().x + m_knight_hp_label.getGlobalBounds().width + 5.0f, m_knight_hp_label.getPosition().y);
@@ -94,7 +98,7 @@ namespace FastSimDesign {
 		m_orc_hp_label.setCharacterSize(14);
 		m_orc_hp_label.setPosition(m_orc_border.getPosition().x + 7.0f, m_orc_border.getPosition().y + 35.0f);
 
-		m_orc_hp_value.setString("100");
+		m_orc_hp_value.setString("0");
 		m_orc_hp_value.setFont(m_font);
 		m_orc_hp_value.setCharacterSize(14);
 		m_orc_hp_value.setPosition(m_orc_hp_label.getPosition().x + m_orc_hp_label.getGlobalBounds().width + 5.0f, m_orc_hp_label.getPosition().y);
@@ -160,7 +164,11 @@ namespace FastSimDesign {
 
 	void GuiLayer::update(sf::Time const& delta_time) noexcept
 	{
-		// TODO update round + other informations
+		Knight& knight_entity = m_world.getEntity<Knight>(0);
+		m_knight_hp_value.setString(std::to_string(knight_entity.hp()));
+
+		Orc& orc_entity = m_world.getEntity<Orc>(1);
+		m_orc_hp_value.setString(std::to_string(orc_entity.hp()));
 	}
 
 	void GuiLayer::updateStatistics(sf::Time const& delta_time) noexcept

@@ -67,6 +67,7 @@ namespace FastSimDesign {
 		private:
 			FastSimDesign::Entity::Id m_id;
 			std::string m_name;
+			uint16_t m_hp;
 		};
 
 		/*****************************************************************************
