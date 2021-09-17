@@ -16,4 +16,9 @@ namespace FastSimDesign {
 		: Parent{world, id, std::move(sprite)}
 	{
 	}
+
+	void Orc::update(sf::Time const& delta_time) noexcept
+	{
+		flagTurnAsCompleted();
+	}
 }

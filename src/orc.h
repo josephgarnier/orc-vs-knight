@@ -26,6 +26,9 @@ namespace FastSimDesign {
 		Orc& operator=(Orc const&) = delete; // Copy assignment operator
 		Orc& operator=(Orc&&) = delete; // Move assignment operator
 		virtual ~Orc() = default; // Destructor
+
+		virtual void update(sf::Time const& delta_time) noexcept override;
+
 	protected:
 	private:
 	};

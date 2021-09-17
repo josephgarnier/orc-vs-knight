@@ -26,6 +26,9 @@ namespace FastSimDesign {
 		Knight& operator=(Knight const&) = delete; // Copy assignment operator
 		Knight& operator=(Knight&&) = delete; // Move assignment operator
 		virtual ~Knight() = default; // Destructor
+
+		virtual void update(sf::Time const& delta_time) noexcept override;
+
 	protected:
 	private:
 	};

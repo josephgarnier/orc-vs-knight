@@ -16,4 +16,9 @@ namespace FastSimDesign {
 		: Parent{world, id, std::move(sprite)}
 	{
 	}
+
+	void Knight::update(sf::Time const& delta_time) noexcept
+	{
+		flagTurnAsCompleted();
+	}
 }
