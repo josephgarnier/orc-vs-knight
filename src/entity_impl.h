@@ -43,13 +43,19 @@ namespace FastSimDesign {
 			inline std::string const& name() const noexcept override { return m_name; }
 			inline FastSimDesign::World const& world() const noexcept override { return m_world; }
 			inline sf::Vector2f const& position() const noexcept override { return m_sprite.position(); }
+			inline uint16_t const& hp() const noexcept override { return m_hp; }
 			inline Sprite const& sprite() const noexcept override { return m_sprite; }
 
+			inline bool hasToken() const noexcept override { return m_have_token; }
+			inline void beginNewTurn() noexcept override { m_turn_completed = false; }
+			inline void giveToken() noexcept override { m_have_token = true; }
 			virtual void update(sf::Time const& delta_time) noexcept override;
-			virtual void term() noexcept override;
+			inline bool isTurnCompleted() noexcept override { return m_turn_completed; }
+			inline void retrieveToken() noexcept override { m_have_token = false; };
 
 			void setName(std::string name) noexcept override;
 			void setPosition(float x, float y) noexcept override;
+			void setHp(uint16_t hp) noexcept override;
 
 			friend inline bool operator==(Entity const& left, Entity const& right) noexcept;
 			friend inline bool operator!=(Entity const& left, Entity const& right) noexcept;
@@ -57,6 +63,8 @@ namespace FastSimDesign {
 			friend inline bool operator>(Entity const& left, Entity const& right) noexcept;
 
 		protected:
+			inline void flagTurnAsCompleted() noexcept { m_turn_completed = true; }
+
 		private:
 			virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
@@ -68,6 +76,9 @@ namespace FastSimDesign {
 			FastSimDesign::Entity::Id m_id;
 			std::string m_name;
 			uint16_t m_hp;
+
+			bool m_have_token;
+			bool m_turn_completed;
 		};
 
 		/*****************************************************************************

@@ -24,15 +24,14 @@ namespace FastSimDesign {
 			, m_id{id}
 			, m_name{""}
 			, m_hp{0}
+			, m_have_token{false}
+			, m_turn_completed{false}
 		{
 		}
 
 		void Entity::update(sf::Time const& delta_time) noexcept
 		{
-		}
-
-		void Entity::term() noexcept
-		{
+			flagTurnAsCompleted();
 		}
 
 		void Entity::setName(std::string name) noexcept

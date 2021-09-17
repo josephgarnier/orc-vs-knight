@@ -24,6 +24,29 @@ namespace FastSimDesign {
 		using EntityContainer = std::vector<std::unique_ptr<Entity>>;
 		using EntityContainerPtr = std::vector<Entity*>;
 		using EntityContainerConstPtr = std::vector<Entity const*>;
+	private:
+		class TurnLoop
+		{
+		public:
+			explicit TurnLoop(EntityContainer const& container); // Default constructor
+			TurnLoop(TurnLoop const&) = delete; // Copy constructor
+			TurnLoop(TurnLoop&&) = delete; // Move constructor
+			TurnLoop& operator=(TurnLoop const&) = delete; // Copy assignment operator
+			TurnLoop& operator=(TurnLoop&&) = delete; // Move assignment operator
+			virtual ~TurnLoop() = default; // Destructor
+		
+			void beginNewTurn() noexcept;
+			inline uint64_t currentTurn() const noexcept {return m_current_Turn;}
+			Entity& currentTokenOwner() const noexcept;
+			void passTokenToNext() noexcept;
+			bool isTurnOver() const noexcept;
+		protected:
+		
+		private:
+			EntityContainer const& m_entity_storage;
+			uint64_t m_current_Turn;
+			EntityContainer::const_iterator m_entity_iterator;
+		};
 
 	public:
 		explicit World(unsigned int width, unsigned int height) noexcept; // Default constructor
@@ -33,9 +56,14 @@ namespace FastSimDesign {
 		World& operator=(World&&) = delete; // Move assignment operator
 		virtual ~World() = default; // Destructor
 
-		void init() noexcept;
+		void beginNewTurn() noexcept;
+		uint64_t currentTurn() const noexcept;
+		Entity const & currentTokenOwner() const noexcept;
+		void passTokenToNextIfComplete() noexcept;
 		void update(sf::Time const& delta_time) noexcept;
-		void term() noexcept;
+		bool isTurnCompletedByOwner() const noexcept;
+		bool isTurnCompletedByAll() const noexcept;
+
 		bool isCoordValid(float x, float y) const noexcept;
 
 		inline bool isExists(Entity::Id const& id) const noexcept { return id >= 0 && id < m_entities.size(); }
@@ -58,6 +86,7 @@ namespace FastSimDesign {
 		unsigned int m_height;
 
 		EntityContainer m_entities;
+		TurnLoop m_entity_loop;
 	};
 }
 #include "world.tpp"

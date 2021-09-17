@@ -37,9 +37,13 @@ namespace FastSimDesign {
 		virtual sf::Vector2f const& position() const noexcept = 0;
 		virtual uint16_t const& hp() const noexcept = 0;
 		virtual Sprite const& sprite() const noexcept = 0;
-
+		
+		virtual bool hasToken() const noexcept = 0;
+		virtual void beginNewTurn() noexcept = 0;
+		virtual void giveToken() noexcept = 0;
 		virtual void update(sf::Time const& delta_time) noexcept = 0;
-		virtual void term() noexcept = 0;
+		virtual bool isTurnCompleted() noexcept = 0;
+		virtual void retrieveToken() noexcept = 0;
 
 		virtual void setName(std::string name) noexcept = 0;
 		virtual void setPosition(float x, float y) noexcept = 0;

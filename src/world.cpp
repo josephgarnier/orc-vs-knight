@@ -9,11 +9,59 @@
 #include "world.h"
 
 #include <cassert>
-#include <iostream>
 
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/System/Time.hpp>
 
 namespace FastSimDesign {
+	/*****************************************************************************
+	TurnLoop::Methods
+	*****************************************************************************/
+	World::TurnLoop::TurnLoop(EntityContainer const& entity_storage)
+		: m_entity_storage{entity_storage}
+		, m_current_Turn{0}
+		, m_entity_iterator{m_entity_storage.begin()}
+	{
+	}
+
+	void World::TurnLoop::beginNewTurn() noexcept
+	{
+		assert(!m_entity_storage.empty() && "Entity storage is empty");
+		m_current_Turn++;
+		for (std::unique_ptr<Entity> const& entity : m_entity_storage)
+		{
+			entity->beginNewTurn();
+		}
+		m_entity_iterator = m_entity_storage.begin();
+		(*m_entity_iterator)->giveToken();
+	}
+
+	Entity& World::TurnLoop::currentTokenOwner() const noexcept
+	{
+		assert(!m_entity_storage.empty() && "Entity storage is empty");
+		Entity& token_owner = *(*m_entity_iterator).get();
+		assert(token_owner.hasToken() && "Entity doesn't have the token");
+		return token_owner;
+	}
+
+	void World::TurnLoop::passTokenToNext() noexcept
+	{
+		if (!isTurnOver())
+		{
+			assert(!m_entity_storage.empty() && "Entity storage is empty");
+			Entity& token_owner = *(*m_entity_iterator).get();
+			assert(token_owner.hasToken() && "Entity doesn't have the token");
+			token_owner.retrieveToken();
+			m_entity_iterator++;
+			(*m_entity_iterator)->giveToken();
+		}
+	}
+
+	bool World::TurnLoop::isTurnOver() const noexcept
+	{
+		return m_entity_iterator == m_entity_storage.end();
+	}
+
 	/*****************************************************************************
 	World::Methods
 	*****************************************************************************/
@@ -21,17 +69,57 @@ namespace FastSimDesign {
 		: m_width{width}
 		, m_height{height}
 		, m_entities{}
+		, m_entity_loop{m_entities}
 	{
 	}
 
-	void World::init() noexcept
+	void World::beginNewTurn() noexcept
 	{
-		std::cout << "World::init" << std::endl;
+		m_entity_loop.beginNewTurn();
+	}
+	
+	uint64_t World::currentTurn() const noexcept
+	{
+		return m_entity_loop.currentTurn();
+	}
+	
+	Entity const & World::currentTokenOwner() const noexcept
+	{
+		return m_entity_loop.currentTokenOwner();
+	}
+
+	void World::passTokenToNextIfComplete() noexcept
+	{
+		if (!m_entity_loop.isTurnOver())
+		{
+			if (m_entity_loop.currentTokenOwner().isTurnCompleted())
+				m_entity_loop.passTokenToNext();
+		}
 	}
 
 	void World::update(sf::Time const& delta_time) noexcept
 	{
-		std::cout << "World::update at delta time => " << delta_time.asMilliseconds() << std::endl;
+		if (!m_entity_loop.isTurnOver())
+		{
+			Entity& currentTokenOwner = m_entity_loop.currentTokenOwner();
+			if (!currentTokenOwner.isTurnCompleted())
+				currentTokenOwner.update(delta_time);
+		}
+	}
+
+	bool World::isTurnCompletedByOwner() const noexcept
+	{
+		return m_entity_loop.currentTokenOwner().isTurnCompleted();
+	}
+
+	bool World::isTurnCompletedByAll() const noexcept
+	{
+		for (std::unique_ptr<Entity> const& entity : m_entities)
+		{
+			if (!entity->isTurnCompleted())
+				return false;
+		}
+		return true;
 	}
 
 	bool World::isCoordValid(float x, float y) const noexcept
