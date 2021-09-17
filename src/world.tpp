@@ -10,8 +10,6 @@
 
 #include <cassert>
 
-#include "entity.h"
-
 namespace FastSimDesign {
 	/*****************************************************************************
 	World::Methods

@@ -14,8 +14,8 @@
 #include "resource_exception.h"
 #include "util/render_util.h"
 #include "world.h"
-#include "knight.h"
-#include "orc.h"
+#include "entity/knight.h"
+#include "entity/orc.h"
 
 namespace FastSimDesign {
 	/*****************************************************************************

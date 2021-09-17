@@ -10,8 +10,8 @@
 
 #include <SFML/Window/Event.hpp>
 
-#include "knight.h"
-#include "orc.h"
+#include "entity/knight.h"
+#include "entity/orc.h"
 
 namespace FastSimDesign {
 	/*****************************************************************************
@@ -196,7 +196,9 @@ namespace FastSimDesign {
 		Knight& knight_entity = m_world.getEntity<Knight>(knight_id);
 		knight_entity.setName("Knight");
 		knight_entity.setPosition(350, 300);
-		knight_entity.setHp(100);
+		knight_entity.setHp(20);
+		// TODO set shield value to 50
+		// TODO set sword with -5hp/turn
 
 		// Create the Orc entity.
 		std::unique_ptr<sf::RectangleShape> orc_body = std::make_unique<sf::RectangleShape>();

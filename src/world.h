@@ -15,7 +15,7 @@
 
 #include <SFML/Graphics/Drawable.hpp>
 
-#include "entity.h"
+#include "entity/entity.h"
 
 namespace FastSimDesign {
 	class World final : public sf::Drawable
