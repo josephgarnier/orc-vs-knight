@@ -32,11 +32,6 @@ namespace FastSimDesign {
 		GuiLayer& operator=(GuiLayer&&) = delete; // Move assignment operator
 		virtual ~GuiLayer() = default; // Destructor
 
-		void initKnightPanel() noexcept;
-		void initOrcPanel() noexcept;
-		void initInfoPanel() noexcept;
-		void initStartingMessagePanel() noexcept;
-
 		void setGameStatus(std::string status) noexcept;
 
 		void processEvents() noexcept;
@@ -45,7 +40,12 @@ namespace FastSimDesign {
 		void updateStatistics(sf::Time const& delta_time) noexcept;
 		void draw() noexcept;
 
-	protected:
+	private:
+		void initKnightPanel() noexcept;
+		void initOrcPanel() noexcept;
+		void initInfoPanel() noexcept;
+		void initStartingMessagePanel() noexcept;
+
 	private:
 		World& m_world;
 		sf::RenderWindow& m_window;
