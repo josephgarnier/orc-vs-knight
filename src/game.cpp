@@ -28,17 +28,17 @@ namespace FastSimDesign {
 	void Game::run(int min_frame_per_seconds) noexcept
 	{
 		sf::Clock clock;
-		sf::Time taget_frame_time = sf::seconds(1.0f / static_cast<float>(min_frame_per_seconds));
+		sf::Time target_frame_time = sf::seconds(1.0f / static_cast<float>(min_frame_per_seconds));
 		sf::Time time_since_last_update = sf::Time::Zero;
 		while (m_window.isOpen())
 		{
 			processEvents();
 			sf::Time elapsed_time = clock.restart();
 			time_since_last_update += elapsed_time;
-			while (time_since_last_update > taget_frame_time)
+			while (time_since_last_update > target_frame_time)
 			{
-				time_since_last_update -= taget_frame_time;
-				update(taget_frame_time);
+				time_since_last_update -= target_frame_time;
+				update(target_frame_time);
 			}
 			m_gui.updateStatistics(elapsed_time);
 			render();

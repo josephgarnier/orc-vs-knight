@@ -32,7 +32,7 @@ namespace FastSimDesign {
 	protected:
 	private:
 		void processEvents() noexcept;
-		void update(sf::Time const& delta_time) noexcept;
+		void update(sf::Time const& fixed_delta_time) noexcept;
 		void render() noexcept;
 
 		void initEntities(); // throw ResourceException
