@@ -179,6 +179,8 @@ namespace FastSimDesign {
 
 		Orc& orc_entity = m_world.getEntity<Orc>(1);
 		m_orc_hp_value.setString(std::to_string(orc_entity.hp()));
+
+		m_round_value.setString(std::to_string(m_world.currentTurn()));
 	}
 
 	void GuiLayer::updateStatistics(sf::Time const& delta_time) noexcept

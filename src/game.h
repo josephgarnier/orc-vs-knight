@@ -19,6 +19,17 @@
 namespace FastSimDesign {
 	class Game
 	{
+	private:
+		enum class Status
+		{
+			Game_Unstarted = 0,
+			Game_Started,
+			Owner_Pending,
+			Owner_Completed,
+			All_Completed,
+			Game_Over
+		};
+
 	public:
 		explicit Game(unsigned int width, unsigned int height); // throw ResourceException
 		Game(Game const&) = delete; // Copy constructor
@@ -40,6 +51,10 @@ namespace FastSimDesign {
 		sf::RenderWindow m_window;
 		World m_world;
 		GuiLayer m_gui;
+		
+		Status m_game_status;
+		bool m_automatic_turn_change;
+		sf::Time m_delay_time;
 	};
 }
 #endif

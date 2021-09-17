@@ -21,6 +21,9 @@ namespace FastSimDesign {
 		: m_window{sf::VideoMode{width, height}, "Orc vs Knight"}
 		, m_world{width, height}
 		, m_gui{m_world, m_window}
+		, m_game_status{Status::Game_Unstarted}
+		, m_automatic_turn_change{true}
+		, m_delay_time{sf::Time::Zero}
 	{
 		initEntities();
 	}
@@ -62,26 +65,110 @@ namespace FastSimDesign {
 							m_window.close();
 							break;
 						case sf::Keyboard::Space:
-							// TODO : start and automatically switch turn
+							if (m_game_status == Status::Game_Unstarted)
+							{
+								m_automatic_turn_change = true;
+								m_gui.clearStartMessage();
+								m_game_status = Status::Game_Started;
+							}
 							break;
-						case sf::Keyboard::Backslash:
-							// TODO : start and manually switch turn
+						case sf::Keyboard::Backspace:
+							if (m_game_status == Status::Game_Unstarted)
+							{
+								m_automatic_turn_change = false;
+								m_gui.clearStartMessage();
+								m_gui.setGameStatus("Press backspace to begin a turn...");
+								m_game_status = Status::Game_Started;
+							} else if (!m_automatic_turn_change && m_game_status == Status::Game_Started)
+							{
+								m_world.beginNewTurn();
+								std::string status_message = m_world.currentTokenOwner().name();
+								status_message += " is playing";
+								m_gui.setGameStatus(status_message);
+								m_game_status = Status::Owner_Pending;
+							} else
+							{
+								m_gui.processEvent(event);
+							}
 							break;
 						default:
-							m_gui.processEvent(event);
+							if (m_game_status != Status::Game_Unstarted && !m_automatic_turn_change)
+								m_gui.processEvent(event);
 							break;
 					}
+					break;
 				default:
-					m_gui.processEvent(event);
+					if (m_game_status != Status::Game_Unstarted && !m_automatic_turn_change)
+						m_gui.processEvent(event);
 					break;
 			}
 		}
 	}
 
-	void Game::update(sf::Time const& delta_time) noexcept
+	void Game::update(sf::Time const& fixed_delta_time) noexcept
 	{
-		//m_world.update(delta_time);
-		m_gui.update(delta_time);
+		switch (m_game_status)
+		{
+			case Status::Game_Started:
+				if (m_automatic_turn_change)
+				{
+					m_world.beginNewTurn();
+					std::string status_message = m_world.currentTokenOwner().name();
+					status_message += " is playing";
+					m_gui.setGameStatus(status_message);
+					m_game_status = Status::Owner_Pending;
+				}
+				break;
+			case Status::Owner_Pending:
+				{
+					if (m_world.isTurnCompletedByOwner())
+						m_game_status = Status::Owner_Completed;
+					else
+						m_world.update(fixed_delta_time);
+				}
+				break;
+			case Status::Owner_Completed:
+				{
+					// Apply a delay to give the player time to read all information.
+					m_delay_time += fixed_delta_time;
+					if (m_delay_time <= sf::seconds(1.0f))
+						break;
+					else
+						m_delay_time = sf::Time::Zero;
+
+					if (m_world.isTurnCompletedByAll())
+					{
+						m_game_status = Status::All_Completed;
+					} else
+					{
+						m_world.passTokenToNextIfComplete();
+						std::string status_message = m_world.currentTokenOwner().name();
+						status_message += " is playing";
+						m_gui.setGameStatus(status_message);
+						m_game_status = Status::Owner_Pending;
+					}
+				}
+				break;
+			case Status::All_Completed:
+				{
+					if (m_world.aliveEntityCount() == 1)
+					{
+						m_game_status = Status::Game_Over;
+					} else
+					{
+						if (!m_automatic_turn_change)
+							m_gui.setGameStatus("Press backspace to begin a turn...");
+						m_game_status = Status::Game_Started;
+					}
+				}
+				break;
+			default:
+				break;
+		}
+		if (m_game_status != Status::Game_Unstarted && m_game_status != Status::Game_Started)
+		{
+			m_gui.update(fixed_delta_time);
+		}
 	}
 
 	void Game::render() noexcept
