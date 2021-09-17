@@ -37,6 +37,8 @@ namespace FastSimDesign {
 		void initInfoPanel() noexcept;
 		void initStartingMessagePanel() noexcept;
 
+		void setGameStatus(std::string status) noexcept;
+
 		void processEvents() noexcept;
 		void processEvent(sf::Event const& event) noexcept;
 		void update(sf::Time const& delta_time) noexcept;
@@ -67,7 +69,7 @@ namespace FastSimDesign {
 		sf::Text m_round_label;
 		sf::Text m_round_value;
 		sf::Text m_game_status_label;
-		sf::Text m_current_player_value;
+		sf::Text m_game_status_value;
 
 		sf::Text m_start_message;
 	};

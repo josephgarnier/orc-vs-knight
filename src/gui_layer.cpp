@@ -154,6 +154,11 @@ namespace FastSimDesign {
 		m_start_message.setPosition(window_size.x / 2, window_size.y / 2 + 200);
 	}
 
+	void GuiLayer::setGameStatus(std::string status) noexcept
+	{
+		m_game_status_value.setString(status);
+	}
+
 	void GuiLayer::processEvents() noexcept
 	{
 	}
