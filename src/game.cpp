@@ -153,6 +153,9 @@ namespace FastSimDesign {
 				{
 					if (m_world.aliveEntityCount() == 1)
 					{
+						std::string status_message = m_world.getAliveEntities().front()->name();
+						status_message += " WON!";
+						m_gui.setGameStatus(status_message);
 						m_game_status = Status::Game_Over;
 					} else
 					{

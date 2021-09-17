@@ -77,6 +77,7 @@ namespace FastSimDesign {
 		void destroyAllEntities() noexcept;
 
 		uint64_t aliveEntityCount() const noexcept;
+		World::EntityContainerPtr getAliveEntities() const noexcept;
 
 	protected:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

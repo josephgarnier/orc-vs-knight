@@ -143,7 +143,7 @@ namespace FastSimDesign {
 
 	void World::destroyAllEntities() noexcept
 	{
-		for (std::unique_ptr<Entity>& entity : m_entities)
+		for (auto& entity : m_entities)
 		{
 			entity.reset();
 		}
@@ -153,7 +153,7 @@ namespace FastSimDesign {
 	uint64_t World::aliveEntityCount() const noexcept
 	{
 		int64_t alive_counter = 0;
-		for (std::unique_ptr<Entity> const& entity : m_entities)
+		for (auto const& entity : m_entities)
 		{
 			if (entity->hp() > 0)
 				alive_counter++;
@@ -161,9 +161,20 @@ namespace FastSimDesign {
 		return alive_counter;
 	}
 
+	World::EntityContainerPtr World::getAliveEntities() const noexcept
+	{
+		EntityContainerPtr alive_entities{};
+		for (auto const& entity : m_entities)
+		{
+			if (entity->hp() > 0)
+				alive_entities.push_back(entity.get());
+		}
+		return alive_entities;
+	}
+
 	void World::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		for (std::unique_ptr<Entity> const& entity : m_entities)
+		for (auto const& entity : m_entities)
 		{
 			target.draw(*entity.get(), states);
 		}
