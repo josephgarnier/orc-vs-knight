@@ -159,6 +159,11 @@ namespace FastSimDesign {
 		m_game_status_value.setString(status);
 	}
 
+	void GuiLayer::clearStartMessage() noexcept
+	{
+		m_start_message.setString("");
+	}
+
 	void GuiLayer::processEvents() noexcept
 	{
 	}

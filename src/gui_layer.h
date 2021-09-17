@@ -33,6 +33,7 @@ namespace FastSimDesign {
 		virtual ~GuiLayer() = default; // Destructor
 
 		void setGameStatus(std::string status) noexcept;
+		void clearStartMessage() noexcept;
 
 		void processEvents() noexcept;
 		void processEvent(sf::Event const& event) noexcept;
