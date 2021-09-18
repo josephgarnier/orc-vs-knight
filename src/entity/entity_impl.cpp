@@ -47,7 +47,7 @@ namespace FastSimDesign {
 			m_sprite.setPosition(sf::Vector2f{x, y});
 		}
 
-		void Entity::setHp(uint16_t hp) noexcept
+		void Entity::setHp(int16_t hp) noexcept
 		{
 			assert(hp >= 0 && "HP must be a positive value");
 			m_hp = hp;

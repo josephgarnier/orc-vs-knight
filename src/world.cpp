@@ -78,7 +78,7 @@ namespace FastSimDesign {
 		m_entity_loop.beginNewTurn();
 	}
 	
-	uint64_t World::currentTurn() const noexcept
+	int64_t World::currentTurn() const noexcept
 	{
 		return m_entity_loop.currentTurn();
 	}
@@ -150,7 +150,7 @@ namespace FastSimDesign {
 		m_entities.clear();
 	}
 
-	uint64_t World::aliveEntityCount() const noexcept
+	int64_t World::aliveEntityCount() const noexcept
 	{
 		int64_t alive_counter = 0;
 		for (auto const& entity : m_entities)

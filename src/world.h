@@ -36,7 +36,7 @@ namespace FastSimDesign {
 			virtual ~TurnLoop() = default; // Destructor
 		
 			void beginNewTurn() noexcept;
-			inline uint64_t currentTurn() const noexcept {return m_current_Turn;}
+			inline int64_t currentTurn() const noexcept {return m_current_Turn;}
 			Entity& currentTokenOwner() const noexcept;
 			void passTokenToNext() noexcept;
 			bool isTurnOver() const noexcept;
@@ -44,7 +44,7 @@ namespace FastSimDesign {
 		
 		private:
 			EntityContainer const& m_entity_storage;
-			uint64_t m_current_Turn;
+			int64_t m_current_Turn;
 			EntityContainer::const_iterator m_entity_iterator;
 		};
 
@@ -57,7 +57,7 @@ namespace FastSimDesign {
 		virtual ~World() = default; // Destructor
 
 		void beginNewTurn() noexcept;
-		uint64_t currentTurn() const noexcept;
+		int64_t currentTurn() const noexcept;
 		Entity const & currentTokenOwner() const noexcept;
 		void passTokenToNextIfComplete() noexcept;
 		void update(sf::Time const& delta_time) noexcept;
@@ -76,7 +76,7 @@ namespace FastSimDesign {
 		Entity::Id createEntity(TEntityArgs&&... args) noexcept;
 		void destroyAllEntities() noexcept;
 
-		uint64_t aliveEntityCount() const noexcept;
+		int64_t aliveEntityCount() const noexcept;
 		World::EntityContainerPtr getAliveEntities() const noexcept;
 
 	protected:
