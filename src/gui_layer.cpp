@@ -29,10 +29,18 @@ namespace FastSimDesign {
 		, m_knight_label{}
 		, m_knight_hp_label{}
 		, m_knight_hp_value{}
+		, m_knight_weapon_label{}
+		, m_knight_weapon_value{}
+		, m_knight_armor_label{}
+		, m_knight_armor_value{}
 		, m_orc_border{}
 		, m_orc_label{}
 		, m_orc_hp_label{}
 		, m_orc_hp_value{}
+		, m_orc_weapon_label{}
+		, m_orc_weapon_value{}
+		, m_orc_armor_label{}
+		, m_orc_armor_value{}
 		, m_stats_label{}
 		, m_stats_value{}
 		, m_stats_time_since_last_update{}
@@ -56,7 +64,7 @@ namespace FastSimDesign {
 
 	void GuiLayer::initKnightPanel() noexcept
 	{
-		m_knight_border.setSize(sf::Vector2f(100, 80));
+		m_knight_border.setSize(sf::Vector2f(150, 120));
 		m_knight_border.setOutlineColor(sf::Color(255, 255, 255));
 		m_knight_border.setOutlineThickness(1);
 		m_knight_border.setFillColor(sf::Color(20, 20, 200));
@@ -77,11 +85,31 @@ namespace FastSimDesign {
 		m_knight_hp_value.setFont(m_font);
 		m_knight_hp_value.setCharacterSize(14);
 		m_knight_hp_value.setPosition(m_knight_hp_label.getPosition().x + m_knight_hp_label.getGlobalBounds().width + 5.0f, m_knight_hp_label.getPosition().y);
+
+		m_knight_weapon_label.setString("Weapon:");
+		m_knight_weapon_label.setFont(m_font);
+		m_knight_weapon_label.setCharacterSize(14);
+		m_knight_weapon_label.setPosition(m_knight_border.getPosition().x + 7.0f, m_knight_hp_label.getPosition().y + 25.0f);
+
+		m_knight_weapon_value.setString("None (+0)");
+		m_knight_weapon_value.setFont(m_font);
+		m_knight_weapon_value.setCharacterSize(14);
+		m_knight_weapon_value.setPosition(m_knight_weapon_label.getPosition().x + m_knight_weapon_label.getGlobalBounds().width + 5.0f, m_knight_weapon_label.getPosition().y);
+
+		m_knight_armor_label.setString("Armor:");
+		m_knight_armor_label.setFont(m_font);
+		m_knight_armor_label.setCharacterSize(14);
+		m_knight_armor_label.setPosition(m_knight_border.getPosition().x + 7.0f, m_knight_weapon_label.getPosition().y + 25.0f);
+
+		m_knight_armor_value.setString("None (+0)");
+		m_knight_armor_value.setFont(m_font);
+		m_knight_armor_value.setCharacterSize(14);
+		m_knight_armor_value.setPosition(m_knight_armor_label.getPosition().x + m_knight_armor_label.getGlobalBounds().width + 5.0f, m_knight_armor_label.getPosition().y);
 	}
 
 	void GuiLayer::initOrcPanel() noexcept
 	{
-		m_orc_border.setSize(sf::Vector2f(100, 80));
+		m_orc_border.setSize(sf::Vector2f(150, 120));
 		m_orc_border.setOutlineColor(sf::Color(255, 255, 255));
 		m_orc_border.setOutlineThickness(1);
 		m_orc_border.setFillColor(sf::Color(20, 200, 20));
@@ -102,6 +130,26 @@ namespace FastSimDesign {
 		m_orc_hp_value.setFont(m_font);
 		m_orc_hp_value.setCharacterSize(14);
 		m_orc_hp_value.setPosition(m_orc_hp_label.getPosition().x + m_orc_hp_label.getGlobalBounds().width + 5.0f, m_orc_hp_label.getPosition().y);
+
+		m_orc_weapon_label.setString("Weapon:");
+		m_orc_weapon_label.setFont(m_font);
+		m_orc_weapon_label.setCharacterSize(14);
+		m_orc_weapon_label.setPosition(m_orc_border.getPosition().x + 7.0f, m_knight_hp_label.getPosition().y + 25.0f);
+
+		m_orc_weapon_value.setString("None(+0)");
+		m_orc_weapon_value.setFont(m_font);
+		m_orc_weapon_value.setCharacterSize(14);
+		m_orc_weapon_value.setPosition(m_orc_weapon_label.getPosition().x + m_orc_weapon_label.getGlobalBounds().width + 5.0f, m_orc_weapon_label.getPosition().y);
+
+		m_orc_armor_label.setString("Armor:");
+		m_orc_armor_label.setFont(m_font);
+		m_orc_armor_label.setCharacterSize(14);
+		m_orc_armor_label.setPosition(m_orc_border.getPosition().x + 7.0f, m_orc_weapon_label.getPosition().y + 25.0f);
+
+		m_orc_armor_value.setString("None(+0)");
+		m_orc_armor_value.setFont(m_font);
+		m_orc_armor_value.setCharacterSize(14);
+		m_orc_armor_value.setPosition(m_orc_armor_label.getPosition().x + m_orc_armor_label.getGlobalBounds().width + 5.0f, m_orc_armor_label.getPosition().y);
 	}
 
 	void GuiLayer::initInfoPanel() noexcept
@@ -176,10 +224,30 @@ namespace FastSimDesign {
 	{
 		Knight& knight_entity = m_world.getEntity<Knight>(0);
 		m_knight_hp_value.setString(std::to_string(knight_entity.hp()));
+		std::string knight_weapon_value = knight_entity.weapon().description();
+		knight_weapon_value += " (+";
+		knight_weapon_value += std::to_string(knight_entity.weapon().attackDamage());
+		knight_weapon_value += ")";
+		m_knight_weapon_value.setString(knight_weapon_value);
+		std::string knight_armor_value = knight_entity.armor().description();
+		knight_armor_value += " (+";
+		knight_armor_value += std::to_string(knight_entity.armor().defensePoints());
+		knight_armor_value += ")";
+		m_knight_armor_value.setString(knight_armor_value);
 
 		Orc& orc_entity = m_world.getEntity<Orc>(1);
 		m_orc_hp_value.setString(std::to_string(orc_entity.hp()));
-
+		std::string orc_weapon_value = orc_entity.weapon().description();
+		orc_weapon_value += " (+";
+		orc_weapon_value += std::to_string(orc_entity.weapon().attackDamage());
+		orc_weapon_value += ")";
+		m_orc_weapon_value.setString(orc_weapon_value);
+		std::string orc_armor_value = orc_entity.armor().description();
+		orc_armor_value += " (+";
+		orc_armor_value += std::to_string(orc_entity.armor().defensePoints());
+		orc_armor_value += ")";
+		m_orc_armor_value.setString(orc_armor_value);
+		
 		m_round_value.setString(std::to_string(m_world.currentTurn()));
 	}
 
@@ -203,11 +271,19 @@ namespace FastSimDesign {
 		m_window.draw(m_knight_label);
 		m_window.draw(m_knight_hp_label);
 		m_window.draw(m_knight_hp_value);
+		m_window.draw(m_knight_weapon_label);
+		m_window.draw(m_knight_weapon_value);
+		m_window.draw(m_knight_armor_label);
+		m_window.draw(m_knight_armor_value);
 
 		m_window.draw(m_orc_border);
 		m_window.draw(m_orc_label);
 		m_window.draw(m_orc_hp_label);
 		m_window.draw(m_orc_hp_value);
+		m_window.draw(m_orc_weapon_label);
+		m_window.draw(m_orc_weapon_value);
+		m_window.draw(m_orc_armor_label);
+		m_window.draw(m_orc_armor_value);
 
 		m_window.draw(m_stats_label);
 		m_window.draw(m_stats_value);

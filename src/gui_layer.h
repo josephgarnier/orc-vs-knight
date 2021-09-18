@@ -57,12 +57,20 @@ namespace FastSimDesign {
 		sf::Text m_knight_label;
 		sf::Text m_knight_hp_label;
 		sf::Text m_knight_hp_value;
+		sf::Text m_knight_weapon_label;
+		sf::Text m_knight_weapon_value;
+		sf::Text m_knight_armor_label;
+		sf::Text m_knight_armor_value;
 
 		sf::RectangleShape m_orc_border;
 		sf::Text m_orc_label;
 		sf::Text m_orc_hp_label;
 		sf::Text m_orc_hp_value;
-
+		sf::Text m_orc_weapon_label;
+		sf::Text m_orc_weapon_value;
+		sf::Text m_orc_armor_label;
+		sf::Text m_orc_armor_value;
+		
 		sf::Text m_stats_label;
 		sf::Text m_stats_value;
 		sf::Time m_stats_time_since_last_update;
