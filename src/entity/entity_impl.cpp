@@ -8,10 +8,13 @@
 
 #include "entity_impl.h"
 
+#include <cassert>
+
 #include <SFML/Graphics/RenderTarget.hpp>
 
 #include "world.h"
 #include "entity/weapon/hands.h"
+#include "entity/armor/no_armor.h"
 
 namespace FastSimDesign {
 	namespace Impl {
@@ -29,6 +32,7 @@ namespace FastSimDesign {
 			, m_have_token{false}
 			, m_turn_completed{false}
 			, m_weapon{std::make_unique<Hands>()}
+			, m_armor{std::make_unique<NoArmor>()}
 		{
 		}
 
@@ -63,6 +67,11 @@ namespace FastSimDesign {
 		void Entity::setWeapon(std::unique_ptr<Weapon> weapon) noexcept
 		{
 			m_weapon = std::move(weapon);
+		}
+
+		void Entity::setArmor(std::unique_ptr<Armor> armor) noexcept
+		{
+			m_armor = std::move(armor);
 		}
 
 		void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const

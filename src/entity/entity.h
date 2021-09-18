@@ -17,9 +17,9 @@
 #include <SFML/Graphics/Drawable.hpp>
 
 #include "entity/weapon/weapon.h"
+#include "entity/armor/armor.h"
 
-namespace sf
-{
+namespace sf {
 	class Time;
 }
 
@@ -41,6 +41,8 @@ namespace FastSimDesign {
 		virtual int16_t const& hp() const noexcept = 0;
 		virtual bool const& isStuned() const noexcept = 0;
 		virtual Sprite const& sprite() const noexcept = 0;
+		virtual Weapon& weapon() const noexcept = 0;
+		virtual Armor& armor() const noexcept = 0;
 		
 		virtual bool hasToken() const noexcept = 0;
 		virtual void beginNewTurn() noexcept = 0;
@@ -53,8 +55,9 @@ namespace FastSimDesign {
 		virtual void setPosition(float x, float y) noexcept = 0;
 		virtual void setHp(int16_t hp) noexcept = 0;
 		virtual void setStuned(bool stuned) noexcept = 0;
-		
+
 		virtual void setWeapon(std::unique_ptr<Weapon> weapon) noexcept = 0;
+		virtual void setArmor(std::unique_ptr<Armor> armor) noexcept = 0;
 	protected:
 	private:
 	};

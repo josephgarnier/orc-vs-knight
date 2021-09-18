@@ -6,29 +6,25 @@
 * LICENSE file in the root directory of this source tree.
 ******************************************************************************/
 
-#include "sword.h"
+#include "shield.h"
 
 #include <algorithm>
 
-#include "entity/entity.h"
-
 namespace FastSimDesign {
 	/*****************************************************************************
-	Sword::Methods
+	Shield::Methods
 	*****************************************************************************/
-	Sword::Sword() noexcept
-		: Parent{}
-		, m_attack_damage{5}
-		, m_description{"sword"}
+	Shield::Shield() noexcept
+	 : Parent{}
+	 , m_defense_points{50}
+	 , m_description{"shield"}
 	{
 	}
 
-	void Sword::attack(Entity& target) const noexcept
+	void Shield::absorbDamages(int16_t amount) noexcept
 	{
-		int16_t attack_damage_absorbed = std::min(target.armor().defensePoints(), m_attack_damage);
-		target.armor().absorbDamages(attack_damage_absorbed);
-		int16_t new_hp = target.hp() - m_attack_damage + attack_damage_absorbed;
-		new_hp = std::clamp(new_hp, static_cast<int16_t>(0), static_cast<int16_t>(INT16_MAX));
-		target.setHp(new_hp);
+		int16_t new_defense_points = m_defense_points - amount;
+		new_defense_points = std::clamp(new_defense_points, static_cast<int16_t>(0), static_cast<int16_t>(INT16_MAX));
+		m_defense_points = new_defense_points;
 	}
 }

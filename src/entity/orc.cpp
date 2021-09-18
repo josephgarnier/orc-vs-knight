@@ -29,14 +29,19 @@ namespace FastSimDesign {
 		} else
 		{
 			FastSimDesign::Entity& selected_target = *potential_targets.front();
-			int16_t damage_of_attack = weapon().attack(selected_target);
+			int16_t armor_before_attack = selected_target.armor().defensePoints();
+			weapon().attack(selected_target);
+			int16_t attack_damage_absorbed = armor_before_attack - selected_target.armor().defensePoints();
 			message += "Attack ";
 			message += selected_target.name();
 			message += " with ";
 			message += weapon().description();
 			message += ": ";
-			message += std::to_string(damage_of_attack);
-			message += " damages";
+			message += std::to_string(weapon().attackDamage());
+			message += " damages\n";
+			message += "Its armor absorbed: ";
+			message += std::to_string(attack_damage_absorbed);
+			message += " points";
 		}
 		m_sprite.setActionDescription(message);
 		flagTurnAsCompleted();

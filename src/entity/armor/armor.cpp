@@ -6,20 +6,10 @@
 * LICENSE file in the root directory of this source tree.
 ******************************************************************************/
 
-#include "hands.h"
+#include "armor.h"
 
 namespace FastSimDesign {
 	/*****************************************************************************
-	Hands::Methods
+	Armor::Methods
 	*****************************************************************************/
-	Hands::Hands() noexcept
-		: Parent{}
-		, m_attack_damage{0}
-		, m_description{"hands"}
-	{
-	}
-
-	void Hands::attack(Entity& target) const noexcept
-	{
-	}
 }

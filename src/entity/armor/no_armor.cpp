@@ -6,29 +6,20 @@
 * LICENSE file in the root directory of this source tree.
 ******************************************************************************/
 
-#include "sword.h"
-
-#include <algorithm>
-
-#include "entity/entity.h"
+#include "no_armor.h"
 
 namespace FastSimDesign {
 	/*****************************************************************************
-	Sword::Methods
+	NoArmor::Methods
 	*****************************************************************************/
-	Sword::Sword() noexcept
+	NoArmor::NoArmor() noexcept
 		: Parent{}
-		, m_attack_damage{5}
-		, m_description{"sword"}
+		, m_defense_points{0}
+		, m_description{"no armor"}
 	{
 	}
 
-	void Sword::attack(Entity& target) const noexcept
+	void NoArmor::absorbDamages(int16_t amount) noexcept
 	{
-		int16_t attack_damage_absorbed = std::min(target.armor().defensePoints(), m_attack_damage);
-		target.armor().absorbDamages(attack_damage_absorbed);
-		int16_t new_hp = target.hp() - m_attack_damage + attack_damage_absorbed;
-		new_hp = std::clamp(new_hp, static_cast<int16_t>(0), static_cast<int16_t>(INT16_MAX));
-		target.setHp(new_hp);
 	}
 }

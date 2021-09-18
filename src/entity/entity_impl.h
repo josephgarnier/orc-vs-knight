@@ -46,6 +46,8 @@ namespace FastSimDesign {
 			inline int16_t const& hp() const noexcept override { return m_hp; }
 			inline bool const& isStuned() const noexcept override { return m_stuned; }
 			inline Sprite const& sprite() const noexcept override { return m_sprite; }
+			inline Weapon& weapon() const noexcept override { return *m_weapon.get(); }
+			inline Armor& armor() const noexcept override { return *m_armor.get(); }
 
 			inline bool hasToken() const noexcept override { return m_have_token; }
 			inline void beginNewTurn() noexcept override { m_turn_completed = false; }
@@ -59,7 +61,8 @@ namespace FastSimDesign {
 			void setHp(int16_t hp) noexcept override;
 			void setStuned(bool stuned) noexcept override;
 			void setWeapon(std::unique_ptr<Weapon> weapon) noexcept override;
-			
+			void setArmor(std::unique_ptr<Armor> armor) noexcept override;
+
 			friend inline bool operator==(Entity const& left, Entity const& right) noexcept;
 			friend inline bool operator!=(Entity const& left, Entity const& right) noexcept;
 			friend inline bool operator<(Entity const& left, Entity const& right) noexcept;
@@ -67,7 +70,7 @@ namespace FastSimDesign {
 
 		protected:
 			inline void flagTurnAsCompleted() noexcept { m_turn_completed = true; }
-			inline Weapon& weapon() noexcept {return *m_weapon.get(); }
+
 		private:
 			virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
@@ -85,6 +88,7 @@ namespace FastSimDesign {
 			bool m_turn_completed;
 
 			std::unique_ptr<Weapon> m_weapon;
+			std::unique_ptr<Armor> m_armor;
 		};
 
 		/*****************************************************************************
