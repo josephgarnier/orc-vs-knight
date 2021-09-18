@@ -42,8 +42,8 @@ namespace FastSimDesign {
 		void draw() noexcept;
 
 	private:
-		void initKnightPanel() noexcept;
 		void initOrcPanel() noexcept;
+		void initKnightPanel() noexcept;
 		void initInfoPanel() noexcept;
 		void initStartingMessagePanel() noexcept;
 
@@ -53,15 +53,6 @@ namespace FastSimDesign {
 
 		sf::Font m_font;
 
-		sf::RectangleShape m_knight_border;
-		sf::Text m_knight_label;
-		sf::Text m_knight_hp_label;
-		sf::Text m_knight_hp_value;
-		sf::Text m_knight_weapon_label;
-		sf::Text m_knight_weapon_value;
-		sf::Text m_knight_armor_label;
-		sf::Text m_knight_armor_value;
-
 		sf::RectangleShape m_orc_border;
 		sf::Text m_orc_label;
 		sf::Text m_orc_hp_label;
@@ -70,6 +61,15 @@ namespace FastSimDesign {
 		sf::Text m_orc_weapon_value;
 		sf::Text m_orc_armor_label;
 		sf::Text m_orc_armor_value;
+
+		sf::RectangleShape m_knight_border;
+		sf::Text m_knight_label;
+		sf::Text m_knight_hp_label;
+		sf::Text m_knight_hp_value;
+		sf::Text m_knight_weapon_label;
+		sf::Text m_knight_weapon_value;
+		sf::Text m_knight_armor_label;
+		sf::Text m_knight_armor_value;
 		
 		sf::Text m_stats_label;
 		sf::Text m_stats_value;

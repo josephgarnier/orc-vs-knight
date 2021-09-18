@@ -184,22 +184,6 @@ namespace FastSimDesign {
 
 	void Game::initEntities()
 	{
-		// Create the Knight entity.
-		std::unique_ptr<sf::RectangleShape> knight_body = std::make_unique<sf::RectangleShape>();
-		knight_body->setSize(sf::Vector2f(100, 100));
-		knight_body->setOutlineColor(sf::Color(20, 20, 200));
-		knight_body->setOutlineThickness(1);
-		knight_body->setFillColor(sf::Color::Transparent);
-		knight_body->setPosition(1, 1);
-		Sprite knight_sprite{std::move(knight_body)};
-		Entity::Id knight_id = m_world.createEntity<Knight>(m_world, 0, std::move(knight_sprite));
-		Knight& knight_entity = m_world.getEntity<Knight>(knight_id);
-		knight_entity.setName("Knight");
-		knight_entity.setPosition(350, 300);
-		knight_entity.setHp(20);
-		knight_entity.setWeapon(std::make_unique<Sword>());
-		knight_entity.setArmor(std::make_unique<Shield>());
-
 		// Create the Orc entity.
 		std::unique_ptr<sf::RectangleShape> orc_body = std::make_unique<sf::RectangleShape>();
 		orc_body->setSize(sf::Vector2f(100, 100));
@@ -208,11 +192,27 @@ namespace FastSimDesign {
 		orc_body->setFillColor(sf::Color::Transparent);
 		orc_body->setPosition(1, 1);
 		Sprite orc_sprite{std::move(orc_body)};
-		Entity::Id orc_id = m_world.createEntity<Orc>(m_world, 1, std::move(orc_sprite));
+		Entity::Id orc_id = m_world.createEntity<Orc>(m_world, 0, std::move(orc_sprite));
 		Orc& orc_entity = m_world.getEntity<Orc>(orc_id);
 		orc_entity.setName("Orc");
-		orc_entity.setPosition(650, 300);
+		orc_entity.setPosition(350, 300);
 		orc_entity.setHp(60);
 		orc_entity.setWeapon(std::make_unique<Axe>());
+
+		// Create the Knight entity.
+		std::unique_ptr<sf::RectangleShape> knight_body = std::make_unique<sf::RectangleShape>();
+		knight_body->setSize(sf::Vector2f(100, 100));
+		knight_body->setOutlineColor(sf::Color(20, 20, 200));
+		knight_body->setOutlineThickness(1);
+		knight_body->setFillColor(sf::Color::Transparent);
+		knight_body->setPosition(1, 1);
+		Sprite knight_sprite{std::move(knight_body)};
+		Entity::Id knight_id = m_world.createEntity<Knight>(m_world, 1, std::move(knight_sprite));
+		Knight& knight_entity = m_world.getEntity<Knight>(knight_id);
+		knight_entity.setName("Knight");
+		knight_entity.setPosition(650, 300);
+		knight_entity.setHp(20);
+		knight_entity.setWeapon(std::make_unique<Sword>());
+		knight_entity.setArmor(std::make_unique<Shield>());
 	}
 }
