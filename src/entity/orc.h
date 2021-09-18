@@ -14,7 +14,7 @@
 #include "entity_impl.h"
 
 namespace FastSimDesign {
-	class Orc : public FastSimDesign::Impl::Entity
+	class Orc final : public FastSimDesign::Impl::Entity
 	{
 	private:
 		using Parent = FastSimDesign::Impl::Entity;

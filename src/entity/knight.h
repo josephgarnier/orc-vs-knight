@@ -14,7 +14,7 @@
 #include "entity_impl.h"
 
 namespace FastSimDesign {
-	class Knight : public FastSimDesign::Impl::Entity
+	class Knight final : public FastSimDesign::Impl::Entity
 	{
 	private:
 		using Parent = FastSimDesign::Impl::Entity;
