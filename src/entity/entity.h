@@ -12,8 +12,11 @@
 #define ORC_VS_KNIGHT_ENTITY_H
 
 #include <string>
+#include <memory>
 
 #include <SFML/Graphics/Drawable.hpp>
+
+#include "entity/weapon/weapon.h"
 
 namespace sf
 {
@@ -50,7 +53,8 @@ namespace FastSimDesign {
 		virtual void setPosition(float x, float y) noexcept = 0;
 		virtual void setHp(int16_t hp) noexcept = 0;
 		virtual void setStuned(bool stuned) noexcept = 0;
-
+		
+		virtual void setWeapon(std::unique_ptr<Weapon> weapon) noexcept = 0;
 	protected:
 	private:
 	};

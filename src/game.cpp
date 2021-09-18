@@ -12,6 +12,8 @@
 
 #include "entity/knight.h"
 #include "entity/orc.h"
+#include "entity/weapon/sword.h"
+#include "entity/weapon/axe.h"
 
 namespace FastSimDesign {
 	/*****************************************************************************
@@ -193,9 +195,8 @@ namespace FastSimDesign {
 		Knight& knight_entity = m_world.getEntity<Knight>(knight_id);
 		knight_entity.setName("Knight");
 		knight_entity.setPosition(350, 300);
-		knight_entity.setHp(20);
-		// TODO set shield value to 50
-		// TODO set sword with -5hp/turn
+		knight_entity.setHp(100);
+		knight_entity.setWeapon(std::make_unique<Sword>());
 
 		// Create the Orc entity.
 		std::unique_ptr<sf::RectangleShape> orc_body = std::make_unique<sf::RectangleShape>();
@@ -210,5 +211,6 @@ namespace FastSimDesign {
 		orc_entity.setName("Orc");
 		orc_entity.setPosition(650, 300);
 		orc_entity.setHp(100);
+		orc_entity.setWeapon(std::make_unique<Axe>());
 	}
 }

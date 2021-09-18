@@ -58,7 +58,8 @@ namespace FastSimDesign {
 			void setPosition(float x, float y) noexcept override;
 			void setHp(int16_t hp) noexcept override;
 			void setStuned(bool stuned) noexcept override;
-
+			void setWeapon(std::unique_ptr<Weapon> weapon) noexcept override;
+			
 			friend inline bool operator==(Entity const& left, Entity const& right) noexcept;
 			friend inline bool operator!=(Entity const& left, Entity const& right) noexcept;
 			friend inline bool operator<(Entity const& left, Entity const& right) noexcept;
@@ -66,7 +67,7 @@ namespace FastSimDesign {
 
 		protected:
 			inline void flagTurnAsCompleted() noexcept { m_turn_completed = true; }
-
+			inline Weapon& weapon() noexcept {return *m_weapon.get(); }
 		private:
 			virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
@@ -82,6 +83,8 @@ namespace FastSimDesign {
 
 			bool m_have_token;
 			bool m_turn_completed;
+
+			std::unique_ptr<Weapon> m_weapon;
 		};
 
 		/*****************************************************************************

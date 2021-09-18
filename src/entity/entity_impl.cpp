@@ -11,6 +11,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 
 #include "world.h"
+#include "entity/weapon/hands.h"
 
 namespace FastSimDesign {
 	namespace Impl {
@@ -27,6 +28,7 @@ namespace FastSimDesign {
 			, m_stuned{false}
 			, m_have_token{false}
 			, m_turn_completed{false}
+			, m_weapon{std::make_unique<Hands>()}
 		{
 		}
 
@@ -56,6 +58,11 @@ namespace FastSimDesign {
 		void Entity::setStuned(bool stuned) noexcept
 		{
 			m_stuned = stuned;
+		}
+
+		void Entity::setWeapon(std::unique_ptr<Weapon> weapon) noexcept
+		{
+			m_weapon = std::move(weapon);
 		}
 
 		void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const

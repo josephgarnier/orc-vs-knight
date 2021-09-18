@@ -8,6 +8,8 @@
 
 #include "orc.h"
 
+#include "world.h"
+
 namespace FastSimDesign {
 	/*****************************************************************************
 	Orc::Methods
@@ -19,6 +21,24 @@ namespace FastSimDesign {
 
 	void Orc::update(sf::Time const& delta_time) noexcept
 	{
+		World::EntityContainerPtr potential_targets = m_world.getEntitiesInFront(*this);
+		std::string message{};
+		if (potential_targets.empty())
+		{
+			message += "No entity to target ";
+		} else
+		{
+			FastSimDesign::Entity& selected_target = *potential_targets.front();
+			int16_t damage_of_attack = weapon().attack(selected_target);
+			message += "Attack ";
+			message += selected_target.name();
+			message += " with ";
+			message += weapon().description();
+			message += ": ";
+			message += std::to_string(damage_of_attack);
+			message += " damages";
+		}
+		m_sprite.setActionDescription(message);
 		flagTurnAsCompleted();
 	}
 }
