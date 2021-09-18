@@ -21,7 +21,7 @@ namespace FastSimDesign {
 	{
 	}
 
-	int16_t Sword::attack(Entity& target) noexcept
+	int16_t Sword::attack(Entity& target) const noexcept
 	{
 		int16_t new_hp = target.hp() - m_attack_damage;
 		if (new_hp < 0)

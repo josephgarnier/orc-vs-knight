@@ -27,7 +27,7 @@ namespace FastSimDesign {
 
 		virtual int16_t const& attackDamage() const noexcept = 0;
 		virtual std::string const& description() const noexcept = 0;
-		virtual int16_t attack(Entity& target) noexcept = 0;
+		virtual int16_t attack(Entity& target) const noexcept = 0;
 
 	protected:
 	private:

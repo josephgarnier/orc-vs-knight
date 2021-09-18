@@ -19,7 +19,7 @@ namespace FastSimDesign {
 	{
 	}
 
-	int16_t Hands::attack(Entity& target) noexcept
+	int16_t Hands::attack(Entity& target) const noexcept
 	{
 		return m_attack_damage;
 	}
