@@ -24,6 +24,7 @@ namespace FastSimDesign {
 			, m_id{id}
 			, m_name{""}
 			, m_hp{0}
+			, m_stuned{false}
 			, m_have_token{false}
 			, m_turn_completed{false}
 		{
@@ -50,6 +51,11 @@ namespace FastSimDesign {
 		{
 			assert(hp >= 0 && "HP must be a positive value");
 			m_hp = hp;
+		}
+
+		void Entity::setStuned(bool stuned) noexcept
+		{
+			m_stuned = stuned;
 		}
 
 		void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
