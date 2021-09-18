@@ -168,10 +168,7 @@ namespace FastSimDesign {
 			default:
 				break;
 		}
-		if (m_game_status != Status::Game_Unstarted && m_game_status != Status::Game_Started)
-		{
-			m_gui.update(fixed_delta_time);
-		}
+		m_gui.update(fixed_delta_time);
 	}
 
 	void Game::render() noexcept
