@@ -44,6 +44,7 @@ namespace FastSimDesign {
 			inline FastSimDesign::World const& world() const noexcept override { return m_world; }
 			inline sf::Vector2f const& position() const noexcept override { return m_sprite.position(); }
 			inline uint16_t const& hp() const noexcept override { return m_hp; }
+			inline bool const& isStuned() const noexcept override { return m_stuned; }
 			inline Sprite const& sprite() const noexcept override { return m_sprite; }
 
 			inline bool hasToken() const noexcept override { return m_have_token; }
@@ -56,6 +57,7 @@ namespace FastSimDesign {
 			void setName(std::string name) noexcept override;
 			void setPosition(float x, float y) noexcept override;
 			void setHp(uint16_t hp) noexcept override;
+			void setStuned(bool stuned) noexcept override;
 
 			friend inline bool operator==(Entity const& left, Entity const& right) noexcept;
 			friend inline bool operator!=(Entity const& left, Entity const& right) noexcept;
@@ -76,6 +78,7 @@ namespace FastSimDesign {
 			FastSimDesign::Entity::Id m_id;
 			std::string m_name;
 			uint16_t m_hp;
+			bool m_stuned;
 
 			bool m_have_token;
 			bool m_turn_completed;
