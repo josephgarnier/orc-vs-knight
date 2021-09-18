@@ -71,6 +71,7 @@ namespace FastSimDesign {
 		World::EntityContainerPtr getEntities() const noexcept;
 		template<typename TEntityType>
 		TEntityType& getEntity(Entity::Id const& id) const noexcept;
+		World::EntityContainerPtr getEntitiesInFront(Entity const& entity) const noexcept;
 
 		template<typename TEntityType, typename... TEntityArgs>
 		Entity::Id createEntity(TEntityArgs&&... args) noexcept;

@@ -141,6 +141,17 @@ namespace FastSimDesign {
 		return entities;
 	}
 
+	World::EntityContainerPtr World::getEntitiesInFront(Entity const& entity) const noexcept
+	{
+		EntityContainerPtr entities_around{};
+		for (Entity* other : getEntities())
+		{
+			if (other->id() != entity.id())
+				entities_around.push_back(other);
+		}
+		return entities_around;
+	}
+
 	void World::destroyAllEntities() noexcept
 	{
 		for (auto& entity : m_entities)
