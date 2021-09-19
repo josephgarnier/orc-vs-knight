@@ -31,6 +31,7 @@ namespace FastSimDesign {
 
 		virtual std::string const& description() const noexcept = 0;
 		virtual int16_t const& cooldown() const noexcept = 0;
+		virtual int16_t const& currentCooldownLevel() const noexcept = 0;
 		virtual bool isReady() const noexcept = 0;
 		
 		virtual void update(sf::Time const& delta_time) noexcept = 0;

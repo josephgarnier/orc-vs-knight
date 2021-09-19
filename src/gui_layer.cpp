@@ -275,7 +275,7 @@ namespace FastSimDesign {
 		m_orc_armor_value.setString(orc_armor_value);
 		std::string orc_ability_value = orc_entity.ability().description();
 		orc_ability_value += " (";
-		orc_ability_value += std::to_string(orc_entity.ability().cooldown());
+		orc_ability_value += std::to_string(orc_entity.ability().currentCooldownLevel());
 		orc_ability_value += ")";
 		m_orc_ability_value.setString(orc_ability_value);
 
@@ -313,7 +313,7 @@ namespace FastSimDesign {
 		m_knight_armor_value.setString(knight_armor_value);
 		std::string knight_ability_value = knight_entity.ability().description();
 		knight_ability_value += " (";
-		knight_ability_value += std::to_string(knight_entity.ability().cooldown());
+		knight_ability_value += std::to_string(knight_entity.ability().currentCooldownLevel());
 		knight_ability_value += ")";
 		m_knight_ability_value.setString(knight_ability_value);
 

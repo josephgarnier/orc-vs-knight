@@ -30,6 +30,7 @@ namespace FastSimDesign {
 
 			inline std::string const& description() const noexcept override { return m_description; }
 			int16_t const& cooldown() const noexcept override { return m_max_cooldown_level; }
+			int16_t const& currentCooldownLevel() const noexcept override { return m_current_cooldown_level; }
 			bool isReady() const noexcept override;
 
 			void update(sf::Time const& delta_time) noexcept override;
