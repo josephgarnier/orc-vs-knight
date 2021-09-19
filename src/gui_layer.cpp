@@ -59,7 +59,7 @@ namespace FastSimDesign {
 		, m_game_status_value{}
 		, m_start_message{}
 	{
-		if (!m_font.loadFromFile("./assets/fonts/arial.ttf"))
+		if (!m_font.loadFromFile("../assets/fonts/arial.ttf"))
 		{
 			throw ResourceException{"Failed to load a font resource!"};
 		}

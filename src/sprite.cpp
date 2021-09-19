@@ -23,7 +23,7 @@ namespace FastSimDesign {
 		, m_shape{std::move(shape)}
 		, m_action_description{}
 	{
-		if (!m_font.loadFromFile("./assets/fonts/arial.ttf"))
+		if (!m_font.loadFromFile("../assets/fonts/arial.ttf"))
 		{
 			throw ResourceException{"Failed to load a font resource!"};
 		}
