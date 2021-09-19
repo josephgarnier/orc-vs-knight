@@ -19,7 +19,7 @@ namespace FastSimDesign {
 	{
 	}
 
-	void Hands::attack(Entity& target) const noexcept
+	void Hands::attack(Entity& target, int16_t attack_amplifier) const noexcept
 	{
 	}
 }

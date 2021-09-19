@@ -31,7 +31,7 @@ namespace FastSimDesign {
 
 		inline int16_t const& attackDamage() const noexcept override { return m_attack_damage; }
 		inline std::string const& description() const noexcept override { return m_description; }
-		void attack(Entity& target) const noexcept override;
+		void attack(Entity& target, int16_t attack_amplifier) const noexcept override;
 
 	protected:
 	private:

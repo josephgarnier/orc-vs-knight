@@ -23,9 +23,10 @@ namespace FastSimDesign {
 	{
 	}
 
-	void Axe::attack(Entity& target) const noexcept
+	void Axe::attack(Entity& target, int16_t attack_amplifier) const noexcept
 	{
-		int16_t attack_damage_absorbed = std::min(target.armor().defensePoints(), m_attack_damage);
+		int16_t realt_attack_damage = m_attack_damage* attack_amplifier;
+		int16_t attack_damage_absorbed = std::min(target.armor().defensePoints(), realt_attack_damage);
 		target.armor().absorbDamages(attack_damage_absorbed);
 		int16_t new_hp = target.hp() - m_attack_damage + attack_damage_absorbed;
 		new_hp = std::clamp(new_hp, static_cast<int16_t>(0), static_cast<int16_t>(INT16_MAX));
