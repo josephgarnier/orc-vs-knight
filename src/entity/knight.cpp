@@ -81,7 +81,8 @@ namespace FastSimDesign {
 		message += ": ";
 		message += std::to_string(hp_losted);
 		message += " damages\n";
-		message += "Its armor absorbed: ";
+		message += selected_target.name();
+		message += " armor absorbed: ";
 		message += std::to_string(attack_damage_absorbed);
 		message += " points";
 		m_sprite.setActionDescription(message);

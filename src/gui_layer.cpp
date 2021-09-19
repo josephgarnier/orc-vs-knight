@@ -33,6 +33,10 @@ namespace FastSimDesign {
 		, m_orc_weapon_value{}
 		, m_orc_armor_label{}
 		, m_orc_armor_value{}
+		, m_orc_ability_label{}
+		, m_orc_ability_value{}
+		, m_orc_active_effects_label{}
+		, m_orc_active_effects_value{}
 		, m_knight_border{}
 		, m_knight_label{}
 		, m_knight_hp_label{}
@@ -41,6 +45,10 @@ namespace FastSimDesign {
 		, m_knight_weapon_value{}
 		, m_knight_armor_label{}
 		, m_knight_armor_value{}
+		, m_knight_ability_label{}
+		, m_knight_ability_value{}
+		, m_knight_active_effects_label{}
+		, m_knight_active_effects_value{}
 		, m_stats_label{}
 		, m_stats_value{}
 		, m_stats_time_since_last_update{}
@@ -64,7 +72,7 @@ namespace FastSimDesign {
 
 	void GuiLayer::initOrcPanel() noexcept
 	{
-		m_orc_border.setSize(sf::Vector2f(150, 120));
+		m_orc_border.setSize(sf::Vector2f(150, 200));
 		m_orc_border.setOutlineColor(sf::Color(255, 255, 255));
 		m_orc_border.setOutlineThickness(1);
 		m_orc_border.setFillColor(sf::Color(20, 200, 20));
@@ -105,11 +113,26 @@ namespace FastSimDesign {
 		m_orc_armor_value.setFont(m_font);
 		m_orc_armor_value.setCharacterSize(14);
 		m_orc_armor_value.setPosition(m_orc_armor_label.getPosition().x + m_orc_armor_label.getGlobalBounds().width + 5.0f, m_orc_armor_label.getPosition().y);
+
+		m_orc_ability_label.setString("Ability:");
+		m_orc_ability_label.setFont(m_font);
+		m_orc_ability_label.setCharacterSize(14);
+		m_orc_ability_label.setPosition(m_orc_border.getPosition().x + 7.0f, m_orc_armor_label.getPosition().y + 25.0f);
+
+		m_orc_ability_value.setString("None (0)");
+		m_orc_ability_value.setFont(m_font);
+		m_orc_ability_value.setCharacterSize(14);
+		m_orc_ability_value.setPosition(m_orc_ability_label.getPosition().x + m_orc_ability_label.getGlobalBounds().width + 5.0f, m_orc_ability_label.getPosition().y);
+
+		m_orc_active_effects_label.setString("Active effects:");
+		m_orc_active_effects_label.setFont(m_font);
+		m_orc_active_effects_label.setCharacterSize(14);
+		m_orc_active_effects_label.setPosition(m_orc_border.getPosition().x + 7.0f, m_orc_ability_label.getPosition().y + 25.0f);
 	}
 
 	void GuiLayer::initKnightPanel() noexcept
 	{
-		m_knight_border.setSize(sf::Vector2f(150, 120));
+		m_knight_border.setSize(sf::Vector2f(150, 200));
 		m_knight_border.setOutlineColor(sf::Color(255, 255, 255));
 		m_knight_border.setOutlineThickness(1);
 		m_knight_border.setFillColor(sf::Color(20, 20, 200));
@@ -150,8 +173,23 @@ namespace FastSimDesign {
 		m_knight_armor_value.setFont(m_font);
 		m_knight_armor_value.setCharacterSize(14);
 		m_knight_armor_value.setPosition(m_knight_armor_label.getPosition().x + m_knight_armor_label.getGlobalBounds().width + 5.0f, m_knight_armor_label.getPosition().y);
+
+		m_knight_ability_label.setString("Ability:");
+		m_knight_ability_label.setFont(m_font);
+		m_knight_ability_label.setCharacterSize(14);
+		m_knight_ability_label.setPosition(m_knight_border.getPosition().x + 7.0f, m_knight_armor_label.getPosition().y + 25.0f);
+
+		m_knight_ability_value.setString("None (0)");
+		m_knight_ability_value.setFont(m_font);
+		m_knight_ability_value.setCharacterSize(14);
+		m_knight_ability_value.setPosition(m_knight_ability_label.getPosition().x + m_knight_ability_label.getGlobalBounds().width + 5.0f, m_knight_ability_label.getPosition().y);
+
+		m_knight_active_effects_label.setString("Active effects:");
+		m_knight_active_effects_label.setFont(m_font);
+		m_knight_active_effects_label.setCharacterSize(14);
+		m_knight_active_effects_label.setPosition(m_knight_border.getPosition().x + 7.0f, m_knight_ability_label.getPosition().y + 25.0f);
 	}
-	
+
 	void GuiLayer::initInfoPanel() noexcept
 	{
 		sf::Vector2f window_size(m_window.getSize());
@@ -199,7 +237,7 @@ namespace FastSimDesign {
 		m_start_message.setFont(m_font);
 		m_start_message.setCharacterSize(15);
 		centerOrigin(m_start_message);
-		m_start_message.setPosition(window_size.x / 2, window_size.y / 2 + 200);
+		m_start_message.setPosition(window_size.x / 2.0f, window_size.y / 2.0f + 200.0f);
 	}
 
 	void GuiLayer::setGameStatus(std::string status) noexcept
@@ -222,6 +260,7 @@ namespace FastSimDesign {
 
 	void GuiLayer::update(sf::Time const& delta_time) noexcept
 	{
+		// Orc update.
 		Orc& orc_entity = m_world.getEntity<Orc>(0);
 		m_orc_hp_value.setString(std::to_string(orc_entity.hp()));
 		std::string orc_weapon_value = orc_entity.weapon().description();
@@ -234,7 +273,32 @@ namespace FastSimDesign {
 		orc_armor_value += std::to_string(orc_entity.armor().defensePoints());
 		orc_armor_value += ")";
 		m_orc_armor_value.setString(orc_armor_value);
+		std::string orc_ability_value = orc_entity.ability().description();
+		orc_ability_value += " (";
+		orc_ability_value += std::to_string(orc_entity.ability().cooldown());
+		orc_ability_value += ")";
+		m_orc_ability_value.setString(orc_ability_value);
 
+		float orc_previous_widget_position_y = m_orc_active_effects_label.getPosition().y;
+		m_orc_active_effects_value.clear();
+		for (auto const & active_effect : orc_entity.activeEffects())
+		{
+			std::string active_effect_value_message = active_effect.description();
+			active_effect_value_message += " (";
+			active_effect_value_message += std::to_string(active_effect.remainingDuration());
+			active_effect_value_message += ")";
+
+			sf::Text active_effect_value{};
+			active_effect_value.setString(active_effect_value_message);
+			active_effect_value.setFont(m_font);
+			active_effect_value.setCharacterSize(14);
+			active_effect_value.setPosition(m_orc_active_effects_label.getPosition().x + 10.0f, orc_previous_widget_position_y + 25.0f);
+
+			m_orc_active_effects_value.push_back(std::move(active_effect_value));
+			orc_previous_widget_position_y = active_effect_value.getPosition().y;
+		}
+
+		// Knight update.
 		Knight& knight_entity = m_world.getEntity<Knight>(1);
 		m_knight_hp_value.setString(std::to_string(knight_entity.hp()));
 		std::string knight_weapon_value = knight_entity.weapon().description();
@@ -247,7 +311,32 @@ namespace FastSimDesign {
 		knight_armor_value += std::to_string(knight_entity.armor().defensePoints());
 		knight_armor_value += ")";
 		m_knight_armor_value.setString(knight_armor_value);
+		std::string knight_ability_value = knight_entity.ability().description();
+		knight_ability_value += " (";
+		knight_ability_value += std::to_string(knight_entity.ability().cooldown());
+		knight_ability_value += ")";
+		m_knight_ability_value.setString(knight_ability_value);
 
+		float knight_previous_widget_position_y = m_knight_active_effects_label.getPosition().y;
+		m_knight_active_effects_value.clear();
+		for (auto const& active_effect : knight_entity.activeEffects())
+		{
+			std::string active_effect_value_message = active_effect.description();
+			active_effect_value_message += " (";
+			active_effect_value_message += std::to_string(active_effect.remainingDuration());
+			active_effect_value_message += ")";
+
+			sf::Text active_effect_value{};
+			active_effect_value.setString(active_effect_value_message);
+			active_effect_value.setFont(m_font);
+			active_effect_value.setCharacterSize(14);
+			active_effect_value.setPosition(m_knight_active_effects_label.getPosition().x + 10.0f, knight_previous_widget_position_y + 25.0f);
+			
+			m_knight_active_effects_value.push_back(std::move(active_effect_value));
+			knight_previous_widget_position_y = active_effect_value.getPosition().y;
+		}
+
+		// Info update.
 		m_round_value.setString(std::to_string(m_world.currentTurn()));
 	}
 
@@ -275,6 +364,13 @@ namespace FastSimDesign {
 		m_window.draw(m_orc_weapon_value);
 		m_window.draw(m_orc_armor_label);
 		m_window.draw(m_orc_armor_value);
+		m_window.draw(m_orc_ability_label);
+		m_window.draw(m_orc_ability_value);
+		m_window.draw(m_orc_active_effects_label);
+		for (auto const & active_effect_value : m_orc_active_effects_value)
+		{
+			m_window.draw(active_effect_value);
+		}
 
 		m_window.draw(m_knight_border);
 		m_window.draw(m_knight_label);
@@ -284,7 +380,14 @@ namespace FastSimDesign {
 		m_window.draw(m_knight_weapon_value);
 		m_window.draw(m_knight_armor_label);
 		m_window.draw(m_knight_armor_value);
-
+		m_window.draw(m_knight_ability_label);
+		m_window.draw(m_knight_ability_value);
+		m_window.draw(m_knight_active_effects_label);
+		for (auto const& active_effect_value : m_knight_active_effects_value)
+		{
+			m_window.draw(active_effect_value);
+		}
+		
 		m_window.draw(m_stats_label);
 		m_window.draw(m_stats_value);
 		m_window.draw(m_round_label);

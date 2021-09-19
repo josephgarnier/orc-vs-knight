@@ -33,13 +33,13 @@ namespace FastSimDesign {
 		m_name.setFont(m_font);
 		m_name.setCharacterSize(18);
 		centerOrigin(m_name);
-		m_name.setPosition(m_shape->getPosition().x, m_shape->getPosition().y - (m_shape->getGlobalBounds().height / 2) - 15.0f);
+		m_name.setPosition(m_shape->getPosition().x, m_shape->getPosition().y - (m_shape->getGlobalBounds().height / 2.0f) - 15.0f);
 
 		m_action_description.setString("Actions: <>");
 		m_action_description.setFont(m_font);
 		m_action_description.setCharacterSize(12);
 		centerOrigin(m_action_description);
-		m_action_description.setPosition(m_shape->getPosition().x, m_shape->getPosition().y + (m_shape->getGlobalBounds().height / 2) + 15.0f);
+		m_action_description.setPosition(m_shape->getPosition().x, m_shape->getPosition().y + (m_shape->getGlobalBounds().height / 2.0f) + (std::round(m_action_description.getGlobalBounds().height / 2.0f)) + 15.0f); // round text position to avoid a blur effect
 	}
 
 	Sprite::Sprite(Sprite&& copy) noexcept
@@ -76,6 +76,7 @@ namespace FastSimDesign {
 	{
 		m_action_description.setString(std::move(action));
 		centerOrigin(m_action_description);
+		m_action_description.setPosition(m_shape->getPosition().x, m_shape->getPosition().y + (m_shape->getGlobalBounds().height / 2.0f) + (std::round(m_action_description.getGlobalBounds().height / 2.0f)) + 15.0f); // round text position to avoid a blur effect
 	}
 
 	void Sprite::draw(sf::RenderTarget& target, sf::RenderStates states) const
