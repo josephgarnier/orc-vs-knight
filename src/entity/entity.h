@@ -13,6 +13,7 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 #include <SFML/Graphics/Drawable.hpp>
 
