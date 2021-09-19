@@ -16,6 +16,8 @@
 
 #include "entity.h"
 #include "sprite.h"
+#include "entity/ability/effect.h"
+#include "entity/ability/ability.h"
 
 namespace sf {
 	class Time;
@@ -25,7 +27,6 @@ namespace sf {
 
 namespace FastSimDesign {
 	namespace Impl {
-		class World;
 		class Entity : public FastSimDesign::Entity
 		{
 		private:
@@ -48,10 +49,14 @@ namespace FastSimDesign {
 			inline Sprite const& sprite() const noexcept override { return m_sprite; }
 			inline Weapon& weapon() const noexcept override { return *m_weapon.get(); }
 			inline Armor& armor() const noexcept override { return *m_armor.get(); }
+			inline Ability& ability() const noexcept override { return *m_ability.get(); }
+			inline std::vector<FastSimDesign::Effect> const& activeEffects() const noexcept override { return m_active_effects; }
 
 			inline bool hasToken() const noexcept override { return m_have_token; }
 			inline void beginNewTurn() noexcept override { m_turn_completed = false; }
 			inline void giveToken() noexcept override { m_have_token = true; }
+			void updateAbility(sf::Time const& delta_time) noexcept override;
+			void updateActiveEffects(sf::Time const& delta_time) noexcept override;
 			virtual void update(sf::Time const& delta_time) noexcept override;
 			inline bool isTurnCompleted() noexcept override { return m_turn_completed; }
 			inline void retrieveToken() noexcept override { m_have_token = false; };
@@ -62,6 +67,8 @@ namespace FastSimDesign {
 			void setStuned(bool stuned) noexcept override;
 			void setWeapon(std::unique_ptr<Weapon> weapon) noexcept override;
 			void setArmor(std::unique_ptr<Armor> armor) noexcept override;
+			void setAbility(std::unique_ptr<FastSimDesign::Ability> ability) noexcept override;
+			void addActiveEffect(FastSimDesign::Effect effect) noexcept override;
 
 			friend inline bool operator==(Entity const& left, Entity const& right) noexcept;
 			friend inline bool operator!=(Entity const& left, Entity const& right) noexcept;
@@ -83,12 +90,13 @@ namespace FastSimDesign {
 			std::string m_name;
 			int16_t m_hp;
 			bool m_stuned;
+			std::unique_ptr<Weapon> m_weapon;
+			std::unique_ptr<Armor> m_armor;
+			std::unique_ptr<FastSimDesign::Ability> m_ability;
+			std::vector<FastSimDesign::Effect> m_active_effects;
 
 			bool m_have_token;
 			bool m_turn_completed;
-
-			std::unique_ptr<Weapon> m_weapon;
-			std::unique_ptr<Armor> m_armor;
 		};
 
 		/*****************************************************************************

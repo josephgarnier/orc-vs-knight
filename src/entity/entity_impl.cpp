@@ -15,6 +15,7 @@
 #include "world.h"
 #include "entity/weapon/hands.h"
 #include "entity/armor/no_armor.h"
+#include "entity/ability/no_ability.h"
 
 namespace FastSimDesign {
 	namespace Impl {
@@ -29,11 +30,31 @@ namespace FastSimDesign {
 			, m_name{""}
 			, m_hp{0}
 			, m_stuned{false}
-			, m_have_token{false}
-			, m_turn_completed{false}
 			, m_weapon{std::make_unique<Hands>()}
 			, m_armor{std::make_unique<NoArmor>()}
+			, m_ability{std::make_unique<NoAbility>()}
+			, m_active_effects{}
+			, m_have_token{false}
+			, m_turn_completed{false}
 		{
+		}
+
+		void Entity::updateAbility(sf::Time const& delta_time) noexcept
+		{
+			m_ability->update(delta_time);
+		}
+
+		void Entity::updateActiveEffects(sf::Time const& delta_time) noexcept
+		{
+			for (auto& effect : m_active_effects)
+			{
+				effect.update(delta_time);
+			}
+
+			// Garbage unactive effects.
+			auto removed = std::remove_if(std::begin(m_active_effects), std::end(m_active_effects), [](Effect const & e) {
+				return e.remainingDuration() == 0;
+			});
 		}
 
 		void Entity::update(sf::Time const& delta_time) noexcept
@@ -72,6 +93,16 @@ namespace FastSimDesign {
 		void Entity::setArmor(std::unique_ptr<Armor> armor) noexcept
 		{
 			m_armor = std::move(armor);
+		}
+
+		void Entity::setAbility(std::unique_ptr<FastSimDesign::Ability> ability) noexcept
+		{
+			m_ability = std::move(ability);
+		}
+
+		void Entity::addActiveEffect(FastSimDesign::Effect effect) noexcept
+		{
+			m_active_effects.push_back(std::move(effect));
 		}
 
 		void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const

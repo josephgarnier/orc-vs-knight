@@ -77,13 +77,13 @@ namespace FastSimDesign {
 	{
 		m_entity_loop.beginNewTurn();
 	}
-	
+
 	int64_t World::currentTurn() const noexcept
 	{
 		return m_entity_loop.currentTurn();
 	}
-	
-	Entity const & World::currentTokenOwner() const noexcept
+
+	Entity const& World::currentTokenOwner() const noexcept
 	{
 		return m_entity_loop.currentTokenOwner();
 	}
@@ -103,7 +103,11 @@ namespace FastSimDesign {
 		{
 			Entity& currentTokenOwner = m_entity_loop.currentTokenOwner();
 			if (!currentTokenOwner.isTurnCompleted())
+			{
+				currentTokenOwner.updateAbility(delta_time);
+				currentTokenOwner.updateActiveEffects(delta_time);
 				currentTokenOwner.update(delta_time);
+			}
 		}
 	}
 
