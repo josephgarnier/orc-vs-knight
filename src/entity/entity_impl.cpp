@@ -55,6 +55,7 @@ namespace FastSimDesign {
 			auto removed = std::remove_if(std::begin(m_active_effects), std::end(m_active_effects), [](Effect const & e) {
 				return e.remainingDuration() == 0;
 			});
+			m_active_effects.erase(removed, std::end(m_active_effects));
 		}
 
 		void Entity::update(sf::Time const& delta_time) noexcept
