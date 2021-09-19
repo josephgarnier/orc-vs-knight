@@ -76,6 +76,13 @@ namespace FastSimDesign {
 	void World::beginNewTurn() noexcept
 	{
 		m_entity_loop.beginNewTurn();
+		// Update "duration" and "cooldown" of active effects and abilities. Then garbage out of time effects.
+		// These operations must be do when a new turn begin, before any entity play.
+		for (std::unique_ptr<Entity> const& entity : m_entities)
+		{
+			entity->updateAbility(sf::Time::Zero);
+			entity->updateActiveEffects(sf::Time::Zero);
+		}
 	}
 
 	int64_t World::currentTurn() const noexcept
@@ -104,8 +111,6 @@ namespace FastSimDesign {
 			Entity& currentTokenOwner = m_entity_loop.currentTokenOwner();
 			if (!currentTokenOwner.isTurnCompleted())
 			{
-				currentTokenOwner.updateAbility(delta_time);
-				currentTokenOwner.updateActiveEffects(delta_time);
 				currentTokenOwner.update(delta_time);
 			}
 		}
