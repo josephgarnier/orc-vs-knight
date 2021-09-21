@@ -46,37 +46,38 @@ The following dependencies are **optional** because they will be **automatically
 
 ## 💫 Specifications
 
-Créer un projet Console sous Visual Studio 2017 ou 2019 qui fera tourner un petit jeu de simulation simple de bataille entre deux unités (chevalier contre orc). Vous êtes libre d'utiliser des librairies externes de votre choix si vous estimez en avoir besoin, à condition que le projet que vous allez fournir à la fin puisse se lancer sans avoir besoin d'installer un autre logiciel. Vous devez nous rendre un fichier zip contenant un repo git local. Celui-ci devra contenir sur la branche master la solution Visual que nous aurons juste à compiler et lancer pour tester votre programme.
+Create a Console project in Visual Studio 2017 or 2019 that will run a small, simple simulation game of battle between two units (knight vs. orc). You are free to use external libraries of your choice if you feel you need them, as long as the project you will provide at the end can run without the need to install any other software. You must give us a zip file containing a local git repo. This should contain on the master branch the Visual solution that we will just have to compile and run to test your program.
 
-Voici une description des règles à respecter. Si certaines règles ne vous semblent pas claires ou qu'il manque de précisions, vous êtes libre de faire des choix à condition de nous les préciser dans votre mail de retour.
+Here is a description of the rules to respect. If some of the them are not clear to you or are not precise enough, you are free to make choices as long as you specify them in your return email.
 
-Caractéristiques du chevalier :
+Characteristics of the knight:
 
-- Il dispose de 20 points de vie et d'un bouclier de 50 points.
-- Il dispose d'une épée lui permettant de faire 5 points de dégâts par tour.
-- Il dispose d'une capacité "charge" lui permettant de faire le double de dégâts ce tour-ci. Cette capacité ne peut être utilisée que tous les 3 tours de jeu. Elle a 60% de chance de réussir. Si elle ne réussit pas, il faudra attendre les 3 tours mentionnés ci-dessus pour la tenter de nouveau.
-- Les dégâts pris par le chevalier sont d'abord infligés au bouclier et lorsque le bouclier n'a plus de points, l'unité perd des points de vie.
+- He has 20 life points and a 50 point shield.
+- He has a sword that allows him to do 5 points of damage per turn.
+- He has a "charge" ability that allows him to do double the damage this turn. This ability can only be used every 3 turns. It has a 60% chance of success. If it doesn't succeed, you will have to wait the 3 turns mentioned above to try it again.
+- The damage taken by the knight is first inflicted on the shield and when the shield has no more points, the unit loses life points.
 
-Caractéristiques de l'orc :
+Orc Characteristics:
 
-- L'orc dispose de 60 points de vie mais n'a pas de bouclier.
-- Il dispose d'une hache lui permettant de faire 8 points de dégâts par tour.
-- Il dispose d'une capacité "stun" lui permettant d'étourdir l'ennemi pendant un tour. Un ennemi étourdi ne pourra pas faire de dégât ce tour-ci. Cette capacité ne peut être utilisée que tous les 5 tours de jeu. Elle a 20% de chance de réussir. Si elle ne réussit pas, il faudra attendre les 5 tours mentionnés ci-dessus pour la tenter de nouveau.
+- He has 60 points of life but has no shield.
+- He has an axe that allows him to do 8 points of damage per turn.
+- He has a "stun" ability that allows him to stun the enemy for one turn. A stunned enemy cannot do any damage this turn. This ability can only be used every 5 turns. It has a 20% chance of success. If it does not succeed, you must wait the 5 turns mentioned above to try it again.
 
-Voici le déroulement de la partie :
+Here is the flow of the game:
 
-- Un tour de jeu est constitué de 2 éléments successifs : lancement de capacités spéciales, puis combat entre les unités.
-- Il y a autant de tour de jeu que nécessaire pour que l'un des côté gagne la partie.
-- Un côté gagne la partie quand l'unité adverse a été tuée.
-- Pour le combat entre 2 unités, chaque unité inflige directement les dégâts à l'unité ennemie (en prenant en compte les éventuels effets des capacités).
+- A game turn consists of 2 successive elements: launching special abilities, then combat between units.
+- There are as many game turns as necessary for one side to win the game.
+- A side wins the game when the opponent unit has been killed.
+- For the combat between 2 units, each unit inflicts directly the damage to the enemy unit (taking into account the possible effects of the abilities).
 
-Contraintes supplémentaires :
+Additional constraints:
 
-- Afin de vérifier que votre programme fonctionne normalement, il serait appréciable de pouvoir suivre l'évolution de la partie en affichant notamment les informations de chaque unité à chaque tour de jeu.
-- Il faut que le programme soit correctement architecturé pour qu'il soit facile d'ajouter de nouvelles classes et/ou de nouvelles caractéristiques.
+- In order to check that your program is working properly, it would be nice to be able to follow the evolution of the game by displaying the information of each unit at each turn.
+- The program must be well structured so that it is easy to add new classes and/or new characteristics.
 
-Bonus :
-- Pour rendre le jeu plus "dynamique", il pourrait être sympa de pouvoir faire des choix avant le lancement de la partie/pendant la partie. Vous êtes libre de faire une/des propositions et de les implémenter.
+Bonus:
+
+- To make the game more "dynamic", it might be nice to be able to make choices before the game starts/during the game. You are free to make a proposal(s) and implement it.
 
 ## ⚙️ Usage and commands
 
