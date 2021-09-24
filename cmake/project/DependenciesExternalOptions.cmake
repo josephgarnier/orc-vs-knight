@@ -15,7 +15,7 @@
 
 #---- Import and link SFML. ----
 message(STATUS "Import and link SFML")
-if(DEFINED ENV{Qt5_DIR}) 
+if(DEFINED ENV{SFML_DIR}) 
 	set(SFML_DIR "$ENV{SFML_DIR}")
 elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
 	if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
